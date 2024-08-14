@@ -10,29 +10,14 @@ using System.Windows.Forms;
 
 namespace NonExamAssesment___Stock_Management
 {
-    public partial class HomePage : Form
+    public partial class Form2 : Form
     {
-        public HomePage()
+        public Form2()
         {
             InitializeComponent();
         }
 
-        private void HomePage_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void StockQueryButton_Click(object sender, EventArgs e)
         {
 
         }

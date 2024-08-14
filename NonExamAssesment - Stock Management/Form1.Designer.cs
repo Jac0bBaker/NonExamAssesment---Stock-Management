@@ -96,6 +96,7 @@
             this.StockQueryButton.TabIndex = 4;
             this.StockQueryButton.Text = "View Stock Query";
             this.StockQueryButton.UseVisualStyleBackColor = false;
+            this.StockQueryButton.Click += new System.EventHandler(this.StockQueryButton_Click);
             // 
             // StockRecordButton
             // 
@@ -123,6 +124,8 @@
             // AddSupplierButton
             // 
             this.AddSupplierButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.AddSupplierButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddSupplierButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddSupplierButton.Location = new System.Drawing.Point(328, 189);
             this.AddSupplierButton.Name = "AddSupplierButton";
             this.AddSupplierButton.Size = new System.Drawing.Size(200, 60);
@@ -133,6 +136,8 @@
             // AddStockItemButton
             // 
             this.AddStockItemButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.AddStockItemButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddStockItemButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddStockItemButton.Location = new System.Drawing.Point(328, 270);
             this.AddStockItemButton.Name = "AddStockItemButton";
             this.AddStockItemButton.Size = new System.Drawing.Size(200, 60);
@@ -143,6 +148,8 @@
             // AddStockUsageButton
             // 
             this.AddStockUsageButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.AddStockUsageButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddStockUsageButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddStockUsageButton.Location = new System.Drawing.Point(328, 351);
             this.AddStockUsageButton.Name = "AddStockUsageButton";
             this.AddStockUsageButton.Size = new System.Drawing.Size(200, 60);
@@ -153,6 +160,8 @@
             // AddSalesDataButton
             // 
             this.AddSalesDataButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.AddSalesDataButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddSalesDataButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddSalesDataButton.Location = new System.Drawing.Point(328, 432);
             this.AddSalesDataButton.Name = "AddSalesDataButton";
             this.AddSalesDataButton.Size = new System.Drawing.Size(200, 60);
@@ -163,6 +172,8 @@
             // AddDeliveryDataButton
             // 
             this.AddDeliveryDataButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.AddDeliveryDataButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddDeliveryDataButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddDeliveryDataButton.Location = new System.Drawing.Point(328, 513);
             this.AddDeliveryDataButton.Name = "AddDeliveryDataButton";
             this.AddDeliveryDataButton.Size = new System.Drawing.Size(200, 60);
