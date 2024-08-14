@@ -1,6 +1,6 @@
 ﻿namespace NonExamAssesment___Stock_Management
 {
-    partial class StockUsageEntry
+    partial class StockUsageEntryPage
     {
         /// <summary>
         /// Required designer variable.
@@ -41,12 +41,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Usage Entry";
             // 
-            // StockUsageEntry
+            // StockUsageEntryPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(382, 503);
             this.Controls.Add(this.label1);
-            this.Name = "StockUsageEntry";
+            this.Name = "StockUsageEntryPage";
             this.Text = "Form6";
             this.ResumeLayout(false);
             this.PerformLayout();

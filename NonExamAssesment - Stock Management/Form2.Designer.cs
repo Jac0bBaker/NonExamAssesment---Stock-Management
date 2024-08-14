@@ -1,6 +1,6 @@
 ﻿namespace NonExamAssesment___Stock_Management
 {
-    partial class Form2
+    partial class StockEntryPage
     {
         /// <summary>
         /// Required designer variable.
@@ -36,6 +36,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.ItemNameText = new System.Windows.Forms.TextBox();
+            this.ItemCostText = new System.Windows.Forms.TextBox();
+            this.ItemPriceText = new System.Windows.Forms.TextBox();
+            this.ReorderQuantityText = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.SupplierCombo = new System.Windows.Forms.ComboBox();
+            this.UnitTypeCombo = new System.Windows.Forms.ComboBox();
+            this.OrderFrequencyCombo = new System.Windows.Forms.ComboBox();
+            this.OnSalesReportCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -119,11 +130,116 @@
             this.label8.TabIndex = 7;
             this.label8.Text = "Order Frequency";
             // 
-            // Form2
+            // ItemNameText
+            // 
+            this.ItemNameText.Location = new System.Drawing.Point(150, 100);
+            this.ItemNameText.Name = "ItemNameText";
+            this.ItemNameText.Size = new System.Drawing.Size(150, 22);
+            this.ItemNameText.TabIndex = 8;
+            // 
+            // ItemCostText
+            // 
+            this.ItemCostText.Location = new System.Drawing.Point(175, 150);
+            this.ItemCostText.Name = "ItemCostText";
+            this.ItemCostText.Size = new System.Drawing.Size(75, 22);
+            this.ItemCostText.TabIndex = 9;
+            // 
+            // ItemPriceText
+            // 
+            this.ItemPriceText.Location = new System.Drawing.Point(175, 200);
+            this.ItemPriceText.Name = "ItemPriceText";
+            this.ItemPriceText.Size = new System.Drawing.Size(75, 22);
+            this.ItemPriceText.TabIndex = 10;
+            // 
+            // ReorderQuantityText
+            // 
+            this.ReorderQuantityText.Location = new System.Drawing.Point(200, 250);
+            this.ReorderQuantityText.Name = "ReorderQuantityText";
+            this.ReorderQuantityText.Size = new System.Drawing.Size(75, 22);
+            this.ReorderQuantityText.TabIndex = 11;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(150, 150);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(19, 21);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "£";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Century", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(150, 200);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(19, 21);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "£";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Century", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(280, 250);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(54, 21);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "Units";
+            // 
+            // SupplierCombo
+            // 
+            this.SupplierCombo.FormattingEnabled = true;
+            this.SupplierCombo.Location = new System.Drawing.Point(125, 300);
+            this.SupplierCombo.Name = "SupplierCombo";
+            this.SupplierCombo.Size = new System.Drawing.Size(150, 24);
+            this.SupplierCombo.TabIndex = 16;
+            // 
+            // UnitTypeCombo
+            // 
+            this.UnitTypeCombo.FormattingEnabled = true;
+            this.UnitTypeCombo.Location = new System.Drawing.Point(125, 350);
+            this.UnitTypeCombo.Name = "UnitTypeCombo";
+            this.UnitTypeCombo.Size = new System.Drawing.Size(150, 24);
+            this.UnitTypeCombo.TabIndex = 17;
+            // 
+            // OrderFrequencyCombo
+            // 
+            this.OrderFrequencyCombo.FormattingEnabled = true;
+            this.OrderFrequencyCombo.Location = new System.Drawing.Point(185, 400);
+            this.OrderFrequencyCombo.Name = "OrderFrequencyCombo";
+            this.OrderFrequencyCombo.Size = new System.Drawing.Size(150, 24);
+            this.OrderFrequencyCombo.TabIndex = 18;
+            // 
+            // OnSalesReportCheck
+            // 
+            this.OnSalesReportCheck.AutoSize = true;
+            this.OnSalesReportCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OnSalesReportCheck.Location = new System.Drawing.Point(30, 450);
+            this.OnSalesReportCheck.Name = "OnSalesReportCheck";
+            this.OnSalesReportCheck.Size = new System.Drawing.Size(164, 24);
+            this.OnSalesReportCheck.TabIndex = 20;
+            this.OnSalesReportCheck.Text = "On Sales Report?";
+            this.OnSalesReportCheck.UseVisualStyleBackColor = true;
+            // 
+            // StockEntryPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 503);
+            this.Controls.Add(this.OnSalesReportCheck);
+            this.Controls.Add(this.OrderFrequencyCombo);
+            this.Controls.Add(this.UnitTypeCombo);
+            this.Controls.Add(this.SupplierCombo);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.ReorderQuantityText);
+            this.Controls.Add(this.ItemPriceText);
+            this.Controls.Add(this.ItemCostText);
+            this.Controls.Add(this.ItemNameText);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -132,7 +248,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form2";
+            this.Name = "StockEntryPage";
             this.Text = "Form2";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -149,5 +265,16 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox ItemNameText;
+        private System.Windows.Forms.TextBox ItemCostText;
+        private System.Windows.Forms.TextBox ItemPriceText;
+        private System.Windows.Forms.TextBox ReorderQuantityText;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox SupplierCombo;
+        private System.Windows.Forms.ComboBox UnitTypeCombo;
+        private System.Windows.Forms.ComboBox OrderFrequencyCombo;
+        private System.Windows.Forms.CheckBox OnSalesReportCheck;
     }
 }

@@ -132,6 +132,7 @@
             this.AddSupplierButton.TabIndex = 7;
             this.AddSupplierButton.Text = "Add Supplier";
             this.AddSupplierButton.UseVisualStyleBackColor = false;
+            this.AddSupplierButton.Click += new System.EventHandler(this.AddSupplierButton_Click);
             // 
             // AddStockItemButton
             // 
@@ -144,6 +145,7 @@
             this.AddStockItemButton.TabIndex = 8;
             this.AddStockItemButton.Text = "Add Stock Item";
             this.AddStockItemButton.UseVisualStyleBackColor = false;
+            this.AddStockItemButton.Click += new System.EventHandler(this.AddStockItemButton_Click);
             // 
             // AddStockUsageButton
             // 
@@ -156,6 +158,7 @@
             this.AddStockUsageButton.TabIndex = 9;
             this.AddStockUsageButton.Text = "Add Stock Usage";
             this.AddStockUsageButton.UseVisualStyleBackColor = false;
+            this.AddStockUsageButton.Click += new System.EventHandler(this.AddStockUsageButton_Click);
             // 
             // AddSalesDataButton
             // 
@@ -168,6 +171,7 @@
             this.AddSalesDataButton.TabIndex = 10;
             this.AddSalesDataButton.Text = "Add Sales Data";
             this.AddSalesDataButton.UseVisualStyleBackColor = false;
+            this.AddSalesDataButton.Click += new System.EventHandler(this.AddSalesDataButton_Click);
             // 
             // AddDeliveryDataButton
             // 
@@ -180,6 +184,7 @@
             this.AddDeliveryDataButton.TabIndex = 11;
             this.AddDeliveryDataButton.Text = "Add Delivery Data";
             this.AddDeliveryDataButton.UseVisualStyleBackColor = false;
+            this.AddDeliveryDataButton.Click += new System.EventHandler(this.AddDeliveryDataButton_Click);
             // 
             // HomePage
             // 

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace NonExamAssesment___Stock_Management
 {
-    public partial class StockUsageEntry : Form
+    public partial class StockUsageEntryPage : Form
     {
-        public StockUsageEntry()
+        public StockUsageEntryPage()
         {
             InitializeComponent();
         }
