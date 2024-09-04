@@ -39,27 +39,28 @@ namespace NonExamAssesment___Stock_Management
 
         private void AddStockItemButton_Click(object sender, EventArgs e)
         {
-            Forms.stockEntryP.Show();
+            (new StockEntryPage()).Show();
+            
         }
 
         private void AddSupplierButton_Click(object sender, EventArgs e)
         {
-            Forms.supplierP.Show();
+            (new SupplierEntryPage()).Show();
         }
 
         private void AddStockUsageButton_Click(object sender, EventArgs e)
         {
-            Forms.stockUsageEntryP.Show();
+            (new StockUsageEntryPage()).Show();
         }
 
         private void AddSalesDataButton_Click(object sender, EventArgs e)
         {
-            Forms.salesDataEntryP.Show();
+            (new SalesDataEntryPage()).Show();
         }
 
         private void AddDeliveryDataButton_Click(object sender, EventArgs e)
         {
-            Forms.deliveryDataEntryP.Show();
+            (new DeliveryDataEntryPage()).Show();
         }
     }
 }

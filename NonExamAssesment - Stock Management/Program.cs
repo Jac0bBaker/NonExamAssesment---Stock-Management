@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,8 @@ namespace NonExamAssesment___Stock_Management
         public static SalesDataEntryPage salesDataEntryP = new SalesDataEntryPage();
         public static StockUsageEntryPage stockUsageEntryP = new StockUsageEntryPage();
     }
+
+    
 
     internal static class Program
     {

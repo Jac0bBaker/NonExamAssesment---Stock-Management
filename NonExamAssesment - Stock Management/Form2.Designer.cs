@@ -39,14 +39,15 @@
             this.ItemNameText = new System.Windows.Forms.TextBox();
             this.ItemCostText = new System.Windows.Forms.TextBox();
             this.ItemPriceText = new System.Windows.Forms.TextBox();
-            this.ReorderQuantityText = new System.Windows.Forms.TextBox();
+            this.MinStockLevelText = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.SupplierCombo = new System.Windows.Forms.ComboBox();
             this.UnitTypeCombo = new System.Windows.Forms.ComboBox();
             this.OrderFrequencyCombo = new System.Windows.Forms.ComboBox();
             this.OnSalesReportCheck = new System.Windows.Forms.CheckBox();
+            this.submitStockEntryButton = new System.Windows.Forms.Button();
+            this.SupplierNameText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -55,7 +56,7 @@
             this.label1.Font = new System.Drawing.Font("Century", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(92, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(215, 40);
+            this.label1.Size = new System.Drawing.Size(213, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Entry";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -96,9 +97,9 @@
             this.label5.Font = new System.Drawing.Font("Century", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(30, 250);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(150, 21);
+            this.label5.Size = new System.Drawing.Size(144, 21);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Reorder Quantity";
+            this.label5.Text = "Min. Stock Level";
             // 
             // label6
             // 
@@ -106,9 +107,9 @@
             this.label6.Font = new System.Drawing.Font("Century", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(30, 300);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 21);
+            this.label6.Size = new System.Drawing.Size(130, 21);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Supplier";
+            this.label6.Text = "Supplier Name";
             // 
             // label7
             // 
@@ -151,12 +152,12 @@
             this.ItemPriceText.Size = new System.Drawing.Size(75, 22);
             this.ItemPriceText.TabIndex = 10;
             // 
-            // ReorderQuantityText
+            // MinStockLevelText
             // 
-            this.ReorderQuantityText.Location = new System.Drawing.Point(200, 250);
-            this.ReorderQuantityText.Name = "ReorderQuantityText";
-            this.ReorderQuantityText.Size = new System.Drawing.Size(75, 22);
-            this.ReorderQuantityText.TabIndex = 11;
+            this.MinStockLevelText.Location = new System.Drawing.Point(200, 250);
+            this.MinStockLevelText.Name = "MinStockLevelText";
+            this.MinStockLevelText.Size = new System.Drawing.Size(75, 22);
+            this.MinStockLevelText.TabIndex = 11;
             // 
             // label10
             // 
@@ -189,17 +190,23 @@
             this.label12.TabIndex = 15;
             this.label12.Text = "Units";
             // 
-            // SupplierCombo
-            // 
-            this.SupplierCombo.FormattingEnabled = true;
-            this.SupplierCombo.Location = new System.Drawing.Point(125, 300);
-            this.SupplierCombo.Name = "SupplierCombo";
-            this.SupplierCombo.Size = new System.Drawing.Size(150, 24);
-            this.SupplierCombo.TabIndex = 16;
-            // 
             // UnitTypeCombo
             // 
+            this.UnitTypeCombo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.UnitTypeCombo.FormattingEnabled = true;
+            this.UnitTypeCombo.Items.AddRange(new object[] {
+            "Bag",
+            "Bottle",
+            "Can",
+            "Pre-packed Sandwich",
+            "Box of 12",
+            "Box of 24",
+            "Box of 50",
+            "Box of 100",
+            "Pack of 12",
+            "Pack of 24",
+            "Pack of 50",
+            "Pack of 100"});
             this.UnitTypeCombo.Location = new System.Drawing.Point(125, 350);
             this.UnitTypeCombo.Name = "UnitTypeCombo";
             this.UnitTypeCombo.Size = new System.Drawing.Size(150, 24);
@@ -207,7 +214,12 @@
             // 
             // OrderFrequencyCombo
             // 
+            this.OrderFrequencyCombo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.OrderFrequencyCombo.FormattingEnabled = true;
+            this.OrderFrequencyCombo.Items.AddRange(new object[] {
+            "Daily",
+            "Monthly",
+            "On Demand"});
             this.OrderFrequencyCombo.Location = new System.Drawing.Point(185, 400);
             this.OrderFrequencyCombo.Name = "OrderFrequencyCombo";
             this.OrderFrequencyCombo.Size = new System.Drawing.Size(150, 24);
@@ -224,19 +236,39 @@
             this.OnSalesReportCheck.Text = "On Sales Report?";
             this.OnSalesReportCheck.UseVisualStyleBackColor = true;
             // 
+            // submitStockEntryButton
+            // 
+            this.submitStockEntryButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.submitStockEntryButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submitStockEntryButton.Location = new System.Drawing.Point(250, 445);
+            this.submitStockEntryButton.Name = "submitStockEntryButton";
+            this.submitStockEntryButton.Size = new System.Drawing.Size(100, 30);
+            this.submitStockEntryButton.TabIndex = 21;
+            this.submitStockEntryButton.Text = "Submit";
+            this.submitStockEntryButton.UseVisualStyleBackColor = true;
+            this.submitStockEntryButton.Click += new System.EventHandler(this.submitStockEntryButton_Click);
+            // 
+            // SupplierNameText
+            // 
+            this.SupplierNameText.Location = new System.Drawing.Point(175, 301);
+            this.SupplierNameText.Name = "SupplierNameText";
+            this.SupplierNameText.Size = new System.Drawing.Size(150, 22);
+            this.SupplierNameText.TabIndex = 22;
+            // 
             // StockEntryPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 503);
+            this.Controls.Add(this.SupplierNameText);
+            this.Controls.Add(this.submitStockEntryButton);
             this.Controls.Add(this.OnSalesReportCheck);
             this.Controls.Add(this.OrderFrequencyCombo);
             this.Controls.Add(this.UnitTypeCombo);
-            this.Controls.Add(this.SupplierCombo);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.ReorderQuantityText);
+            this.Controls.Add(this.MinStockLevelText);
             this.Controls.Add(this.ItemPriceText);
             this.Controls.Add(this.ItemCostText);
             this.Controls.Add(this.ItemNameText);
@@ -268,13 +300,14 @@
         private System.Windows.Forms.TextBox ItemNameText;
         private System.Windows.Forms.TextBox ItemCostText;
         private System.Windows.Forms.TextBox ItemPriceText;
-        private System.Windows.Forms.TextBox ReorderQuantityText;
+        private System.Windows.Forms.TextBox MinStockLevelText;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox SupplierCombo;
         private System.Windows.Forms.ComboBox UnitTypeCombo;
         private System.Windows.Forms.ComboBox OrderFrequencyCombo;
         private System.Windows.Forms.CheckBox OnSalesReportCheck;
+        private System.Windows.Forms.Button submitStockEntryButton;
+        private System.Windows.Forms.TextBox SupplierNameText;
     }
 }

@@ -33,7 +33,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.SupplierCombo = new System.Windows.Forms.ComboBox();
+            this.deliveryStockItemText = new System.Windows.Forms.TextBox();
+            this.deliverySupplierText = new System.Windows.Forms.TextBox();
+            this.deliveryDateText = new System.Windows.Forms.TextBox();
+            this.deliveryQuantityText = new System.Windows.Forms.TextBox();
+            this.deliverySubmitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -42,7 +46,7 @@
             this.label1.Font = new System.Drawing.Font("Century", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(13, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(356, 40);
+            this.label1.Size = new System.Drawing.Size(350, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "Delivery Data Entry";
             // 
@@ -86,20 +90,55 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Delivery Quantity";
             // 
-            // SupplierCombo
+            // deliveryStockItemText
             // 
-            this.SupplierCombo.FormattingEnabled = true;
-            this.SupplierCombo.Location = new System.Drawing.Point(115, 100);
-            this.SupplierCombo.Name = "SupplierCombo";
-            this.SupplierCombo.Size = new System.Drawing.Size(150, 24);
-            this.SupplierCombo.TabIndex = 5;
+            this.deliveryStockItemText.Location = new System.Drawing.Point(150, 150);
+            this.deliveryStockItemText.Name = "deliveryStockItemText";
+            this.deliveryStockItemText.Size = new System.Drawing.Size(150, 22);
+            this.deliveryStockItemText.TabIndex = 6;
+            // 
+            // deliverySupplierText
+            // 
+            this.deliverySupplierText.Location = new System.Drawing.Point(125, 100);
+            this.deliverySupplierText.Name = "deliverySupplierText";
+            this.deliverySupplierText.Size = new System.Drawing.Size(150, 22);
+            this.deliverySupplierText.TabIndex = 7;
+            // 
+            // deliveryDateText
+            // 
+            this.deliveryDateText.Location = new System.Drawing.Point(160, 200);
+            this.deliveryDateText.Name = "deliveryDateText";
+            this.deliveryDateText.Size = new System.Drawing.Size(100, 22);
+            this.deliveryDateText.TabIndex = 9;
+            // 
+            // deliveryQuantityText
+            // 
+            this.deliveryQuantityText.Location = new System.Drawing.Point(190, 250);
+            this.deliveryQuantityText.Name = "deliveryQuantityText";
+            this.deliveryQuantityText.Size = new System.Drawing.Size(75, 22);
+            this.deliveryQuantityText.TabIndex = 10;
+            // 
+            // deliverySubmitButton
+            // 
+            this.deliverySubmitButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deliverySubmitButton.Location = new System.Drawing.Point(30, 300);
+            this.deliverySubmitButton.Name = "deliverySubmitButton";
+            this.deliverySubmitButton.Size = new System.Drawing.Size(100, 30);
+            this.deliverySubmitButton.TabIndex = 11;
+            this.deliverySubmitButton.Text = "Submit";
+            this.deliverySubmitButton.UseVisualStyleBackColor = true;
+            this.deliverySubmitButton.Click += new System.EventHandler(this.deliverySubmitButton_Click);
             // 
             // DeliveryDataEntryPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 503);
-            this.Controls.Add(this.SupplierCombo);
+            this.Controls.Add(this.deliverySubmitButton);
+            this.Controls.Add(this.deliveryQuantityText);
+            this.Controls.Add(this.deliveryDateText);
+            this.Controls.Add(this.deliverySupplierText);
+            this.Controls.Add(this.deliveryStockItemText);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -119,6 +158,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox SupplierCombo;
+        private System.Windows.Forms.TextBox deliveryStockItemText;
+        private System.Windows.Forms.TextBox deliverySupplierText;
+        private System.Windows.Forms.TextBox deliveryDateText;
+        private System.Windows.Forms.TextBox deliveryQuantityText;
+        private System.Windows.Forms.Button deliverySubmitButton;
     }
 }
