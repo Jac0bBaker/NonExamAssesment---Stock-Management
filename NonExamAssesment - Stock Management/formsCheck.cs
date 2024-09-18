@@ -12,7 +12,7 @@ namespace NonExamAssesment___Stock_Management
     {
         public performChecks()
         {
-            connection.Open();
+            
         }
 
         public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
@@ -142,6 +142,8 @@ namespace NonExamAssesment___Stock_Management
 
         public bool checkProductExists(string product) //check product exists
         {
+            connection.Open();
+
             bool productExists = false;
             SQLiteCommand checkProductName = new SQLiteCommand("SELECT productName FROM Product", connection);
             SQLiteDataReader readProduct = checkProductName.ExecuteReader();
@@ -160,18 +162,24 @@ namespace NonExamAssesment___Stock_Management
             {
                 showAlerts("Product could not be found. Please check you have entered a valid product name");
             }
+
+            connection.Close();
+
             return productExists;
         }
 
-        public bool checkSupplierExsists(string supplier)
+        public bool checkSupplierExsists(string supplier) //check the supplier exists
         {
+            connection.Open();
+            string supplierName = "";
+
             bool supplierExists = false;
             SQLiteCommand checkSupplierName = new SQLiteCommand("SELECT supplierName FROM Supplier", connection);
             SQLiteDataReader readSupplier = checkSupplierName.ExecuteReader();
 
             while (readSupplier.Read())
             {
-                string supplierName = readSupplier.Read().ToString();
+                supplierName = readSupplier["supplierName"].ToString();
                 if (supplierName.ToUpper() == supplier.ToUpper())
                 {
                     supplierExists = true;
@@ -183,6 +191,9 @@ namespace NonExamAssesment___Stock_Management
             {
                 showAlerts("Supplier could not be found. Please check you have entered a valid supplier name.");
             }
+
+            connection.Close();
+
             return supplierExists;
         }
 
@@ -195,13 +206,13 @@ namespace NonExamAssesment___Stock_Management
             }
             catch (Exception)
             {
-                showAlerts("Please check the number entered contains no spaces and begins with a 0");
+                showAlerts("Please check the number entered contains no spaces");
                 validNumber = false;
             }
 
             if (number.Length != 11) //this checks all numbers are the correct length
             {
-                showAlerts("Please check the number entered contains no spaces and begins with a 0");
+                showAlerts("Please check an appropriate number has been entered");
                 validNumber = false;
             }
 

@@ -17,7 +17,7 @@ namespace NonExamAssesment___Stock_Management
         public StockEntryPage()
         {
             InitializeComponent();
-            connection.Open();
+            
         }
 
         public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
@@ -44,6 +44,30 @@ namespace NonExamAssesment___Stock_Management
             }
         }
 
+        static int findSupplierID(string supplier)
+        {
+            connection.Open();
+
+            int supplierID = 0; ;
+            string supplierName = "";
+
+            SQLiteCommand selectName = new SQLiteCommand("SELECT supplierID, supplierName FROM supplier", connection);
+            SQLiteDataReader readSupplier = selectName.ExecuteReader();
+            while (readSupplier.Read())
+            {
+                supplierID = int.Parse(readSupplier["supplierID"].ToString());
+                supplierName = readSupplier["supplierName"].ToString();
+
+                if (supplierName.ToUpper() == supplier.ToUpper())
+                {
+                    break;
+                }
+            }
+            connection.Close();
+
+            return supplierID;
+        }
+
         private void submitStockEntryButton_Click(object sender, EventArgs e)
         {
             performChecks check = new performChecks();
@@ -55,11 +79,15 @@ namespace NonExamAssesment___Stock_Management
                 check.checkSupplierExsists(SupplierNameText.Text)
                 )
             {
-                SQLiteCommand insertProduct = new SQLiteCommand("INSERT INTO Product(productName, productCost, productPrice, minStockLevel, unitType, orderFrequency, onReport) " +
-                    "VALUES ('" + ItemNameText.Text + "', '" + double.Parse(ItemCostText.Text) + "', '" + double.Parse(ItemPriceText.Text) + "', '" + int.Parse(MinStockLevelText.Text) + "', '" + SupplierNameText.Text + "', '" + UnitTypeCombo.Text + "', '" + OrderFrequencyCombo.Text + "', '" + onSalesReport(OnSalesReportCheck.Checked) + "')", connection);
+                connection.Open();
+                int supplierID = findSupplierID(SupplierNameText.Text);
+
+                SQLiteCommand insertProduct = new SQLiteCommand("INSERT INTO Product(productName, supplierID, productCost, productPrice, minStockLevel, unitType, orderFrequency, onReport) " +
+                    "VALUES ('" + ItemNameText.Text + "', '" + supplierID + "', '" + double.Parse(ItemCostText.Text) + "', '" + double.Parse(ItemPriceText.Text) + "', '" + int.Parse(MinStockLevelText.Text) + "', '" + UnitTypeCombo.Text + "', '" + OrderFrequencyCombo.Text + "', '" + onSalesReport(OnSalesReportCheck.Checked) + "')", connection);
                 insertProduct.ExecuteNonQuery();
 
                 MessageBox.Show("Stock item successfully added.");
+                connection.Close();
             }
 
             check.alertsSent = 0;
