@@ -62,5 +62,15 @@ namespace NonExamAssesment___Stock_Management
         {
             (new DeliveryDataEntryPage()).Show();
         }
+
+        private void WastageOutputBox_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void WastageSubmitButton_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
