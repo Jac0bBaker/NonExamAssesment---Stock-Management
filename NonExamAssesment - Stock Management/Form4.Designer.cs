@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeliveryDataEntryPage));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -120,6 +121,7 @@
             // 
             // deliverySubmitButton
             // 
+            this.deliverySubmitButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deliverySubmitButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deliverySubmitButton.Location = new System.Drawing.Point(30, 300);
             this.deliverySubmitButton.Name = "deliverySubmitButton";
@@ -144,8 +146,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DeliveryDataEntryPage";
-            this.Text = "Form4";
+            this.Text = "Delivery Data Entry";
             this.ResumeLayout(false);
             this.PerformLayout();
 

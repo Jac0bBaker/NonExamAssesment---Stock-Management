@@ -16,10 +16,7 @@ namespace NonExamAssesment___Stock_Management
         public SupplierEntryPage()
         {
             InitializeComponent();
-            connection.Open();
         }
-
-        public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
 
         public performChecks check = new performChecks();
 
@@ -29,11 +26,15 @@ namespace NonExamAssesment___Stock_Management
                 check.checkValidEmail(EmailAddressText.Text) == true
                 )
             {
-                SQLiteCommand insertProduct = new SQLiteCommand("INSERT INTO Supplier(supplierName, telephoneNumber, emailAddress) " +
-                   "VALUES ('" + SupplierNameText.Text + "', '" + double.Parse(TelephoneNumberText.Text) + "', '" + EmailAddressText.Text + "')", connection);
-                insertProduct.ExecuteNonQuery();
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+                {
+                    connection.Open();
+                    SQLiteCommand insertSupplier = new SQLiteCommand("INSERT INTO Supplier(supplierName, telephoneNumber, emailAddress) " +
+                       "VALUES ('" + SupplierNameText.Text + "', '" + double.Parse(TelephoneNumberText.Text) + "', '" + EmailAddressText.Text + "')", connection);
+                    insertSupplier.ExecuteNonQuery();
 
-                MessageBox.Show("Supplier successfully added.");
+                    MessageBox.Show("Supplier successfully added.");
+                }
             }
 
             check.alertsSent = 0;

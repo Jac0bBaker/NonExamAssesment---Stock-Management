@@ -16,12 +16,8 @@ namespace NonExamAssesment___Stock_Management
         public DeliveryDataEntryPage()
         {
             InitializeComponent();
-            connection.Open();
-
             deliveryDateText.AppendText(todayDate);
         }
-
-        public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
 
         public performChecks check = new performChecks();
 
@@ -29,16 +25,25 @@ namespace NonExamAssesment___Stock_Management
 
         private void deliverySubmitButton_Click(object sender, EventArgs e)
         {
-            /*
-            if ((checkSupplier(deliverySupplierText.Text) == true) &&
-                (checkProduct(deliveryStockItemText.Text) == true) &&
-                (checkDate(deliveryDateText.Text) == true) &&
-                (checkQuantity(deliveryQuantityText.Text) == true)
+            
+            if ((check.checkSupplierExsists(deliverySupplierText.Text) == true) &&
+                (check.checkProductExists(deliveryStockItemText.Text) == true) &&
+                (check.checkDate(deliveryDateText.Text) == true) &&
+                (check.checkIntFormat(deliveryQuantityText.Text) == true)
                 )
             {
-                MessageBox.Show("Ready to go");
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+                {
+                    connection.Open();
+                    SQLiteCommand insertSupplier = new SQLiteCommand("INSERT INTO Supplier(supplierName, telephoneNumber, emailAddress) " +
+                       "VALUES ('" + deliverySupplierText.Text + "', '" + deliveryStockItemText.Text + "', '" + deliveryDateText.Text + "')", connection);
+                    insertSupplier.ExecuteNonQuery();
+
+                    MessageBox.Show("Delivery successfully added.");
+                }
             }
-            */
+
+            check.alertsSent = 0;
         }
     }
 }

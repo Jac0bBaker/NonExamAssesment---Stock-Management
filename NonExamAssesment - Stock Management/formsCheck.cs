@@ -15,7 +15,7 @@ namespace NonExamAssesment___Stock_Management
             
         }
 
-        public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
+        //public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
 
         public int alertsSent = 0; //public as must be changed back to zero after each attempt
 
@@ -142,58 +142,58 @@ namespace NonExamAssesment___Stock_Management
 
         public bool checkProductExists(string product) //check product exists
         {
-            connection.Open();
-
             bool productExists = false;
-            SQLiteCommand checkProductName = new SQLiteCommand("SELECT productName FROM Product", connection);
-            SQLiteDataReader readProduct = checkProductName.ExecuteReader();
 
-            while (readProduct.Read())
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
-                string productName = readProduct.Read().ToString();
-                if (productName.ToUpper() == product.ToUpper())
+                connection.Open();
+                SQLiteCommand checkProductName = new SQLiteCommand("SELECT productName FROM Product", connection);
+                SQLiteDataReader readProduct = checkProductName.ExecuteReader();
+
+                while (readProduct.Read())
                 {
-                    productExists = true;
-                    break;
+                    string productName = readProduct.Read().ToString();
+                    if (productName.ToUpper() == product.ToUpper())
+                    {
+                        productExists = true;
+                        break;
+                    }
+                }
+
+                if (productExists == false)
+                {
+                    showAlerts("Product could not be found. Please check you have entered a valid product name");
                 }
             }
-
-            if (productExists == false)
-            {
-                showAlerts("Product could not be found. Please check you have entered a valid product name");
-            }
-
-            connection.Close();
-
             return productExists;
         }
 
         public bool checkSupplierExsists(string supplier) //check the supplier exists
         {
-            connection.Open();
             string supplierName = "";
-
             bool supplierExists = false;
-            SQLiteCommand checkSupplierName = new SQLiteCommand("SELECT supplierName FROM Supplier", connection);
-            SQLiteDataReader readSupplier = checkSupplierName.ExecuteReader();
 
-            while (readSupplier.Read())
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
-                supplierName = readSupplier["supplierName"].ToString();
-                if (supplierName.ToUpper() == supplier.ToUpper())
+                connection.Open();
+                SQLiteCommand checkSupplierName = new SQLiteCommand("SELECT supplierName FROM Supplier", connection);
+                SQLiteDataReader readSupplier = checkSupplierName.ExecuteReader();
+
+                while (readSupplier.Read())
                 {
-                    supplierExists = true;
-                    break;
+                    supplierName = readSupplier["supplierName"].ToString();
+                    if (supplierName.ToUpper() == supplier.ToUpper())
+                    {
+                        supplierExists = true;
+                        break;
+                    }
+                }
+
+                if (supplierExists == false)
+                {
+                    showAlerts("Supplier could not be found. Please check you have entered a valid supplier name.");
                 }
             }
-
-            if (supplierExists == false)
-            {
-                showAlerts("Supplier could not be found. Please check you have entered a valid supplier name.");
-            }
-
-            connection.Close();
-
             return supplierExists;
         }
 

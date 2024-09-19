@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesDataEntryPage));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -101,12 +102,13 @@
             // 
             // salesSubmitButton
             // 
+            this.salesSubmitButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.salesSubmitButton.Font = new System.Drawing.Font("Century", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.salesSubmitButton.Location = new System.Drawing.Point(30, 250);
             this.salesSubmitButton.Name = "salesSubmitButton";
             this.salesSubmitButton.Size = new System.Drawing.Size(100, 30);
             this.salesSubmitButton.TabIndex = 7;
-            this.salesSubmitButton.Text = "button1";
+            this.salesSubmitButton.Text = "Submit";
             this.salesSubmitButton.UseVisualStyleBackColor = true;
             this.salesSubmitButton.Click += new System.EventHandler(this.salesSubmitButton_Click);
             // 
@@ -123,8 +125,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalesDataEntryPage";
-            this.Text = "Form5";
+            this.Text = "Sales Data Entry";
             this.ResumeLayout(false);
             this.PerformLayout();
 

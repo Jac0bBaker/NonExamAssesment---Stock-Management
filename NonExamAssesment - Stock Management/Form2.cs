@@ -20,7 +20,7 @@ namespace NonExamAssesment___Stock_Management
             
         }
 
-        public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
+        //public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -46,25 +46,25 @@ namespace NonExamAssesment___Stock_Management
 
         static int findSupplierID(string supplier)
         {
-            connection.Open();
-
             int supplierID = 0; ;
             string supplierName = "";
 
-            SQLiteCommand selectName = new SQLiteCommand("SELECT supplierID, supplierName FROM supplier", connection);
-            SQLiteDataReader readSupplier = selectName.ExecuteReader();
-            while (readSupplier.Read())
+            using(SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
-                supplierID = int.Parse(readSupplier["supplierID"].ToString());
-                supplierName = readSupplier["supplierName"].ToString();
-
-                if (supplierName.ToUpper() == supplier.ToUpper())
+                connection.Open();
+                SQLiteCommand selectName = new SQLiteCommand("SELECT supplierID, supplierName FROM supplier", connection);
+                SQLiteDataReader readSupplier = selectName.ExecuteReader();
+                while (readSupplier.Read())
                 {
-                    break;
+                    supplierID = int.Parse(readSupplier["supplierID"].ToString());
+                    supplierName = readSupplier["supplierName"].ToString();
+
+                    if (supplierName.ToUpper() == supplier.ToUpper())
+                    {
+                        break;
+                    }
                 }
             }
-            connection.Close();
-
             return supplierID;
         }
 
@@ -79,6 +79,20 @@ namespace NonExamAssesment___Stock_Management
                 check.checkSupplierExsists(SupplierNameText.Text)
                 )
             {
+                int supplierID = findSupplierID(SupplierNameText.Text);
+                MessageBox.Show(supplierID.ToString());
+
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+                {
+                    connection.Open();
+                    SQLiteCommand insertProduct = new SQLiteCommand("INSERT INTO Product(productName, supplierID, productCost, productPrice, minStockLevel, unitType, orderFrequency, onReport) " +
+                        "VALUES ('" + ItemNameText.Text + "', '" + supplierID + "', '" + double.Parse(ItemCostText.Text) + "', '" + double.Parse(ItemPriceText.Text) + "', '" + int.Parse(MinStockLevelText.Text) + "', '" + UnitTypeCombo.Text + "', '" + OrderFrequencyCombo.Text + "', '" + onSalesReport(OnSalesReportCheck.Checked) + "')", connection);
+                    insertProduct.ExecuteNonQuery();
+
+                    MessageBox.Show("Stock item successfully added.");
+                }
+
+                /*
                 connection.Open();
                 int supplierID = findSupplierID(SupplierNameText.Text);
 
@@ -87,7 +101,7 @@ namespace NonExamAssesment___Stock_Management
                 insertProduct.ExecuteNonQuery();
 
                 MessageBox.Show("Stock item successfully added.");
-                connection.Close();
+                connection.Dispose(); */
             }
 
             check.alertsSent = 0;
