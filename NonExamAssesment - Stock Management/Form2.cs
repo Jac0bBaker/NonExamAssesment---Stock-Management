@@ -51,8 +51,7 @@ namespace NonExamAssesment___Stock_Management
             if (check.checkIntFormat(MinStockLevelText.Text) == true &&
                 check.checkDoubleFormat(ItemCostText.Text) == true &&
                 check.checkDoubleFormat(ItemPriceText.Text) == true &&
-                check.checkEmptyCombo(UnitTypeCombo.Text) == false //&&
-                //check.checkSupplierExsists(SupplierNameText.Text)
+                check.checkEmptyCombo(UnitTypeCombo.Text) == false
                 )
             {
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))

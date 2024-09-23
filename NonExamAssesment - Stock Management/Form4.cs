@@ -30,9 +30,7 @@ namespace NonExamAssesment___Stock_Management
             int productID = check.findProductID(DeliveryProductCombo.Text);
             int supplierID = check.findSupplierID(DeliverySupplierCombo.Text);
 
-            if (//(check.checkSupplierExsists(deliverySupplierText.Text) == true) &&
-                //(check.checkProductExists(deliveryStockItemText.Text) == true) &&
-                (check.checkDate(deliveryDateText.Text) == true) &&
+            if ((check.checkDate(deliveryDateText.Text) == true) &&
                 (check.checkIntFormat(deliveryQuantityText.Text) == true)
                 )
             {

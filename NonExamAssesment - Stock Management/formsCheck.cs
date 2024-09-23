@@ -17,7 +17,7 @@ namespace NonExamAssesment___Stock_Management
 
         public int alertsSent = 0; //public as must be changed back to zero after each attempt
 
-        protected void showAlerts(string alertText) //protected so that it cannot be accessed outside class
+        public void showAlerts(string alertText) //protected so that it cannot be accessed outside class
         {
             if (alertsSent < 1) //this prevents more than one alert being sent each run
             {
@@ -138,63 +138,6 @@ namespace NonExamAssesment___Stock_Management
             return validDate;
         }
 
-        public bool checkProductExists(string product) //check product exists
-        {
-            bool productExists = false;
-
-            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
-            {
-                connection.Open();
-                SQLiteCommand checkProductName = new SQLiteCommand("SELECT productName FROM Product", connection);
-                SQLiteDataReader readProduct = checkProductName.ExecuteReader();
-
-                while (readProduct.Read())
-                {
-                    string productName = readProduct.Read().ToString();
-                    if (productName.ToUpper() == product.ToUpper())
-                    {
-                        productExists = true;
-                        break;
-                    }
-                }
-
-                if (productExists == false)
-                {
-                    showAlerts("Product could not be found. Please check you have entered a valid product name");
-                }
-            }
-            return productExists;
-        }
-
-        public bool checkSupplierExsists(string supplier) //check the supplier exists
-        {
-            string supplierName = "";
-            bool supplierExists = false;
-
-            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
-            {
-                connection.Open();
-                SQLiteCommand checkSupplierName = new SQLiteCommand("SELECT supplierName FROM Supplier", connection);
-                SQLiteDataReader readSupplier = checkSupplierName.ExecuteReader();
-
-                while (readSupplier.Read())
-                {
-                    supplierName = readSupplier["supplierName"].ToString();
-                    if (supplierName.ToUpper() == supplier.ToUpper())
-                    {
-                        supplierExists = true;
-                        break;
-                    }
-                }
-
-                if (supplierExists == false)
-                {
-                    showAlerts("Supplier could not be found. Please check you have entered a valid supplier name.");
-                }
-            }
-            return supplierExists;
-        }
-
         public bool checkValidTelephone(string number)
         {
             bool validNumber = true;
@@ -268,8 +211,8 @@ namespace NonExamAssesment___Stock_Management
                 SQLiteDataReader readProduct = selectName.ExecuteReader();
                 while (readProduct.Read())
                 {
-                    productID = int.Parse(readProduct["supplierID"].ToString());
-                    productName = readProduct["supplierName"].ToString();
+                    productID = int.Parse(readProduct["productID"].ToString());
+                    productName = readProduct["productName"].ToString();
 
                     if (productName.ToUpper() == product.ToUpper())
                     {
@@ -297,6 +240,7 @@ namespace NonExamAssesment___Stock_Management
                 }
             }
         }
+
         public void populateProductCombo(ComboBox productCombo)
         {
             string productName = "";
@@ -315,5 +259,28 @@ namespace NonExamAssesment___Stock_Management
             }
         }
 
+        public bool checkOnSalesReport(string product)
+        {
+            bool onSalesReport = false;
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand fetchProductName = new SQLiteCommand($"SELECT productName, onReport FROM Product", connection);
+                SQLiteDataReader readProduct = fetchProductName.ExecuteReader();
+
+                while (readProduct.Read())
+                {
+                    if (readProduct["productName"].ToString() == product)
+                    {
+                        if (readProduct["onReport"].ToString() == "yes")
+                        {
+                            onSalesReport = true;
+                        }
+                    }
+                }
+            }
+            return onSalesReport;
+        }
     }
 }

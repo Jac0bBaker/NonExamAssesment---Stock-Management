@@ -244,6 +244,7 @@
             this.AlertsRefreshButton.TabIndex = 14;
             this.AlertsRefreshButton.Text = "refesh";
             this.AlertsRefreshButton.UseVisualStyleBackColor = false;
+            this.AlertsRefreshButton.Click += new System.EventHandler(this.AlertsRefreshButton_Click);
             // 
             // label6
             // 

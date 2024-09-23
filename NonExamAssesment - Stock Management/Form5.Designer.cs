@@ -108,7 +108,7 @@
             // SalesProductCombo
             // 
             this.SalesProductCombo.FormattingEnabled = true;
-            this.SalesProductCombo.Location = new System.Drawing.Point(140, 101);
+            this.SalesProductCombo.Location = new System.Drawing.Point(140, 100);
             this.SalesProductCombo.Name = "SalesProductCombo";
             this.SalesProductCombo.Size = new System.Drawing.Size(150, 24);
             this.SalesProductCombo.TabIndex = 8;

@@ -28,9 +28,9 @@ namespace NonExamAssesment___Stock_Management
         {
             int productID = check.findProductID(UsageProductCombo.Text);
 
-            if (//(check.checkProductExists(UsageProductCombo.Text) == true) &&
-                (check.checkDate(UsageDateText.Text) == true) &&
-                (check.checkIntFormat(UsageQuantityText.Text) == true)
+            if ((check.checkDate(UsageDateText.Text) == true) &&
+                (check.checkIntFormat(UsageQuantityText.Text) == true &&
+                (check.checkOnSalesReport(UsageProductCombo.Text)) == false)
                 )
             {
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
@@ -42,6 +42,10 @@ namespace NonExamAssesment___Stock_Management
 
                     MessageBox.Show("Usage successfully added.");
                 }
+            }
+            else if (check.checkOnSalesReport(UsageProductCombo.Text) == true)
+            {
+                check.showAlerts("Only products not on the sales report can be added");
             }
             check.alertsSent = 0;
         }
