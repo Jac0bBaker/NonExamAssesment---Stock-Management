@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace NonExamAssesment___Stock_Management
         {
             InitializeComponent();
         }
+
+        public performChecks check = new performChecks();
 
         private void HomePage_Load(object sender, EventArgs e)
         {
@@ -73,11 +76,93 @@ namespace NonExamAssesment___Stock_Management
             
         }
 
+        //---------------------------------------------------------------------------------------------
+
+        public int calculateDeliveryQuantity(int productID)
+        {
+            int totalDeliveries = 0;
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                SQLiteCommand checkEachDelivery = new SQLiteCommand($"SELECT deliveryQuantity FROM Delivery WHERE productID = {productID}", connection);
+                SQLiteDataReader readDeliveries = checkEachDelivery.ExecuteReader();
+
+                while (readDeliveries.Read())
+                {
+                    totalDeliveries += int.Parse(readDeliveries["deliveryQuantity"].ToString());
+                }
+            }
+            return totalDeliveries;
+        }
+
+        public int calculateQuantitySales(int productID) //this will add all the deliveies of a product and subtract all the sales
+        {
+            int totalSales = 0;
+            
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                SQLiteCommand checkEachSale = new SQLiteCommand($"SELECT salesQuantity FROM salesData WHERE productID = {productID}", connection);
+                SQLiteDataReader readSales = checkEachSale.ExecuteReader();
+
+                while (readSales.Read())
+                {
+                    totalSales += int.Parse(readSales["salesQuantity"].ToString());
+                }
+            }
+            return (calculateDeliveryQuantity(productID) - totalSales);
+        }
+
+        public int calculateQuantityUsage(int productID) //this will add all the deliveies of a product and subtract all the usage
+        {
+            int totalUsage = 0;
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                SQLiteCommand checkEachUse = new SQLiteCommand($"SELECT usageQuantity FROM usageData WHERE productID = {productID}", connection);
+                SQLiteDataReader readUsage = checkEachUse.ExecuteReader();
+
+                while (readUsage.Read())
+                {
+                    totalUsage += int.Parse(readUsage["salesQuantity"].ToString());
+                }
+            }
+            return (calculateDeliveryQuantity(productID) - totalUsage);
+        }
+
         private void AlertsRefreshButton_Click(object sender, EventArgs e)
         {
-            //This will go through each item which is on-demand and will look through the quantity.
-            //There will then be a subtraction with the most recent delivery update.
-            //If this falls below the minimum level the item is added until fixed.
+            //next to be added is feature to remove items which have been reordered
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand checkOrderFrequency = new SQLiteCommand("SELECT productName, orderFrequency, minStockLevel, onReport FROM Product", connection);
+                SQLiteDataReader readProduct = checkOrderFrequency.ExecuteReader();
+
+                while (readProduct.Read())
+                {
+                    if (readProduct["orderFrequency"].ToString() == "on-demand")
+                    {
+                        int productID = check.findProductID(readProduct["productName"].ToString());
+                        if (readProduct["onReport"].ToString() == "yes")
+                        {
+                            if (int.Parse(readProduct["minStockLevel"].ToString()) >= calculateQuantitySales(productID))
+                            {
+                                AlertsList.Items.Add(readProduct["productName"].ToString());
+                            }
+                        }
+                        else
+                        {
+                            if (int.Parse(readProduct["minStockLevel"].ToString()) >= calculateQuantityUsage(productID))
+                            {
+                                AlertsList.Items.Add(readProduct["productName"].ToString());
+                            }
+                        }
+                        
+                    }
+                }
+
+            }
         }
     }
 }

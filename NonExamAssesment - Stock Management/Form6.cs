@@ -36,7 +36,7 @@ namespace NonExamAssesment___Stock_Management
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
                 {
                     connection.Open();
-                    SQLiteCommand insertSale = new SQLiteCommand("INSERT INTO Supplier(supplierName, telephoneNumber, emailAddress) " +
+                    SQLiteCommand insertSale = new SQLiteCommand("INSERT INTO usageData(productID, usageDate, usageQuantity) " +
                        "VALUES ('" + productID + "', '" + UsageDateText.Text + "', '" + int.Parse(UsageQuantityText.Text) + "')", connection);
                     insertSale.ExecuteNonQuery();
 
