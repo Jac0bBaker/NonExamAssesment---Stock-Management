@@ -36,7 +36,6 @@ namespace NonExamAssesment___Stock_Management
                     MessageBox.Show("Supplier successfully added.");
                 }
             }
-
             check.alertsSent = 0;
         }
     }

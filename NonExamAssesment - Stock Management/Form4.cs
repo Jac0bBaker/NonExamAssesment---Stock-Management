@@ -25,7 +25,9 @@ namespace NonExamAssesment___Stock_Management
 
         private void deliverySubmitButton_Click(object sender, EventArgs e)
         {
-            
+            int productID = check.findProductID(deliveryStockItemText.Text);
+            int supplierID = check.findSupplierID(deliverySupplierText.Text);
+
             if ((check.checkSupplierExsists(deliverySupplierText.Text) == true) &&
                 (check.checkProductExists(deliveryStockItemText.Text) == true) &&
                 (check.checkDate(deliveryDateText.Text) == true) &&
@@ -35,14 +37,13 @@ namespace NonExamAssesment___Stock_Management
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
                 {
                     connection.Open();
-                    SQLiteCommand insertSupplier = new SQLiteCommand("INSERT INTO Supplier(supplierName, telephoneNumber, emailAddress) " +
-                       "VALUES ('" + deliverySupplierText.Text + "', '" + deliveryStockItemText.Text + "', '" + deliveryDateText.Text + "')", connection);
-                    insertSupplier.ExecuteNonQuery();
+                    SQLiteCommand insertDelivery = new SQLiteCommand("INSERT INTO Supplier(productID, deliveryDate, deliveryQuantity) " +
+                       "VALUES ('" + productID + "', '" + supplierID + "', '" + deliveryDateText.Text + "', '" + int.Parse(deliveryQuantityText.Text) + "')", connection);
+                    insertDelivery.ExecuteNonQuery();
 
                     MessageBox.Show("Delivery successfully added.");
                 }
             }
-
             check.alertsSent = 0;
         }
     }

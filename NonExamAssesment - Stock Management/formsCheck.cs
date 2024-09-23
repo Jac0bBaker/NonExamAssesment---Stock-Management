@@ -15,8 +15,6 @@ namespace NonExamAssesment___Stock_Management
             
         }
 
-        //public static SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True");
-
         public int alertsSent = 0; //public as must be changed back to zero after each attempt
 
         protected void showAlerts(string alertText) //protected so that it cannot be accessed outside class
@@ -232,6 +230,54 @@ namespace NonExamAssesment___Stock_Management
             }
 
             return validEmail;
+        }
+
+        public int findSupplierID(string supplier)
+        {
+            int supplierID = 0; ;
+            string supplierName = "";
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand selectName = new SQLiteCommand("SELECT supplierID, supplierName FROM supplier", connection);
+                SQLiteDataReader readSupplier = selectName.ExecuteReader();
+                while (readSupplier.Read())
+                {
+                    supplierID = int.Parse(readSupplier["supplierID"].ToString());
+                    supplierName = readSupplier["supplierName"].ToString();
+
+                    if (supplierName.ToUpper() == supplier.ToUpper())
+                    {
+                        break;
+                    }
+                }
+            }
+            return supplierID;
+        }
+
+        public int findProductID(string product)
+        {
+            int productID = 0; ;
+            string productName = "";
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand selectName = new SQLiteCommand("SELECT productID, productName FROM product", connection);
+                SQLiteDataReader readProduct = selectName.ExecuteReader();
+                while (readProduct.Read())
+                {
+                    productID = int.Parse(readProduct["supplierID"].ToString());
+                    productName = readProduct["supplierName"].ToString();
+
+                    if (productName.ToUpper() == product.ToUpper())
+                    {
+                        break;
+                    }
+                }
+            }
+            return productID;
         }
     }
 }

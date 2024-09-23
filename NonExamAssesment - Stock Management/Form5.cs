@@ -16,7 +16,6 @@ namespace NonExamAssesment___Stock_Management
         public SalesDataEntryPage()
         {
             InitializeComponent();
-
             salesDateText.AppendText(todayDate);
         }
 
@@ -26,7 +25,24 @@ namespace NonExamAssesment___Stock_Management
 
         private void salesSubmitButton_Click(object sender, EventArgs e)
         {
-            //if ((check.checkProductExists))
+            int productID = check.findProductID(salesProductText.Text);
+
+            if ((check.checkProductExists(salesProductText.Text) == true) &&
+                (check.checkDate(salesDateText.Text) == true) &&
+                (check.checkIntFormat(salesQuantityText.Text) == true)
+                )
+            {
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+                {
+                    connection.Open();
+                    SQLiteCommand insertSale = new SQLiteCommand("INSERT INTO Supplier(supplierName, telephoneNumber, emailAddress) " +
+                       "VALUES ('" + productID + "', '" + salesDateText.Text + "', '" + int.Parse(salesQuantityText.Text) + "')", connection);
+                    insertSale.ExecuteNonQuery();
+
+                    MessageBox.Show("Sale successfully added.");
+                }
+            }
+            check.alertsSent = 0;
         }
     }
 }
