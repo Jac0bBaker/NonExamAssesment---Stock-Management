@@ -33,10 +33,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.UsageStockItemText = new System.Windows.Forms.TextBox();
             this.UsageDateText = new System.Windows.Forms.TextBox();
             this.UsageQuantityText = new System.Windows.Forms.TextBox();
             this.UsageStockItemButton = new System.Windows.Forms.Button();
+            this.UsageProductCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -79,13 +79,6 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Quantity";
             // 
-            // UsageStockItemText
-            // 
-            this.UsageStockItemText.Location = new System.Drawing.Point(150, 100);
-            this.UsageStockItemText.Name = "UsageStockItemText";
-            this.UsageStockItemText.Size = new System.Drawing.Size(150, 22);
-            this.UsageStockItemText.TabIndex = 4;
-            // 
             // UsageDateText
             // 
             this.UsageDateText.Location = new System.Drawing.Point(100, 150);
@@ -111,14 +104,22 @@
             this.UsageStockItemButton.UseVisualStyleBackColor = true;
             this.UsageStockItemButton.Click += new System.EventHandler(this.UsageStockItemButton_Click);
             // 
+            // UsageProductCombo
+            // 
+            this.UsageProductCombo.FormattingEnabled = true;
+            this.UsageProductCombo.Location = new System.Drawing.Point(140, 100);
+            this.UsageProductCombo.Name = "UsageProductCombo";
+            this.UsageProductCombo.Size = new System.Drawing.Size(150, 24);
+            this.UsageProductCombo.TabIndex = 8;
+            // 
             // StockUsageEntryPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(382, 503);
+            this.Controls.Add(this.UsageProductCombo);
             this.Controls.Add(this.UsageStockItemButton);
             this.Controls.Add(this.UsageQuantityText);
             this.Controls.Add(this.UsageDateText);
-            this.Controls.Add(this.UsageStockItemText);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -137,9 +138,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox UsageStockItemText;
         private System.Windows.Forms.TextBox UsageDateText;
         private System.Windows.Forms.TextBox UsageQuantityText;
         private System.Windows.Forms.Button UsageStockItemButton;
+        private System.Windows.Forms.ComboBox UsageProductCombo;
     }
 }

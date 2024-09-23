@@ -33,10 +33,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.salesProductText = new System.Windows.Forms.TextBox();
             this.salesDateText = new System.Windows.Forms.TextBox();
             this.salesQuantityText = new System.Windows.Forms.TextBox();
             this.salesSubmitButton = new System.Windows.Forms.Button();
+            this.SalesProductCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -79,13 +79,6 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Date";
             // 
-            // salesProductText
-            // 
-            this.salesProductText.Location = new System.Drawing.Point(150, 100);
-            this.salesProductText.Name = "salesProductText";
-            this.salesProductText.Size = new System.Drawing.Size(150, 22);
-            this.salesProductText.TabIndex = 4;
-            // 
             // salesDateText
             // 
             this.salesDateText.Location = new System.Drawing.Point(100, 150);
@@ -112,15 +105,23 @@
             this.salesSubmitButton.UseVisualStyleBackColor = true;
             this.salesSubmitButton.Click += new System.EventHandler(this.salesSubmitButton_Click);
             // 
+            // SalesProductCombo
+            // 
+            this.SalesProductCombo.FormattingEnabled = true;
+            this.SalesProductCombo.Location = new System.Drawing.Point(140, 101);
+            this.SalesProductCombo.Name = "SalesProductCombo";
+            this.SalesProductCombo.Size = new System.Drawing.Size(150, 24);
+            this.SalesProductCombo.TabIndex = 8;
+            // 
             // SalesDataEntryPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 503);
+            this.Controls.Add(this.SalesProductCombo);
             this.Controls.Add(this.salesSubmitButton);
             this.Controls.Add(this.salesQuantityText);
             this.Controls.Add(this.salesDateText);
-            this.Controls.Add(this.salesProductText);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -140,9 +141,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox salesProductText;
         private System.Windows.Forms.TextBox salesDateText;
         private System.Windows.Forms.TextBox salesQuantityText;
         private System.Windows.Forms.Button salesSubmitButton;
+        private System.Windows.Forms.ComboBox SalesProductCombo;
     }
 }

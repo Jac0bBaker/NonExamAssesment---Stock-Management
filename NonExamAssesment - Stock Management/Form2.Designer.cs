@@ -48,7 +48,7 @@
             this.OrderFrequencyCombo = new System.Windows.Forms.ComboBox();
             this.OnSalesReportCheck = new System.Windows.Forms.CheckBox();
             this.submitStockEntryButton = new System.Windows.Forms.Button();
-            this.SupplierNameText = new System.Windows.Forms.TextBox();
+            this.SupplierNameCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -249,19 +249,20 @@
             this.submitStockEntryButton.UseVisualStyleBackColor = true;
             this.submitStockEntryButton.Click += new System.EventHandler(this.submitStockEntryButton_Click);
             // 
-            // SupplierNameText
+            // SupplierNameCombo
             // 
-            this.SupplierNameText.Location = new System.Drawing.Point(175, 301);
-            this.SupplierNameText.Name = "SupplierNameText";
-            this.SupplierNameText.Size = new System.Drawing.Size(150, 22);
-            this.SupplierNameText.TabIndex = 22;
+            this.SupplierNameCombo.FormattingEnabled = true;
+            this.SupplierNameCombo.Location = new System.Drawing.Point(175, 300);
+            this.SupplierNameCombo.Name = "SupplierNameCombo";
+            this.SupplierNameCombo.Size = new System.Drawing.Size(150, 24);
+            this.SupplierNameCombo.TabIndex = 23;
             // 
             // StockEntryPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 503);
-            this.Controls.Add(this.SupplierNameText);
+            this.Controls.Add(this.SupplierNameCombo);
             this.Controls.Add(this.submitStockEntryButton);
             this.Controls.Add(this.OnSalesReportCheck);
             this.Controls.Add(this.OrderFrequencyCombo);
@@ -310,6 +311,6 @@
         private System.Windows.Forms.ComboBox OrderFrequencyCombo;
         private System.Windows.Forms.CheckBox OnSalesReportCheck;
         private System.Windows.Forms.Button submitStockEntryButton;
-        private System.Windows.Forms.TextBox SupplierNameText;
+        private System.Windows.Forms.ComboBox SupplierNameCombo;
     }
 }

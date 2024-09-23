@@ -279,5 +279,41 @@ namespace NonExamAssesment___Stock_Management
             }
             return productID;
         }
+
+        public void populateSupplierCombo(ComboBox supplierCombo)
+        {
+            string supplierName = "";
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand fetchSupplierName = new SQLiteCommand("SELECT supplierName FROM Supplier", connection);
+                SQLiteDataReader readSupplier = fetchSupplierName.ExecuteReader();
+
+                while (readSupplier.Read())
+                {
+                    supplierName = readSupplier["supplierName"].ToString();
+                    supplierCombo.Items.Add(supplierName);
+                }
+            }
+        }
+        public void populateProductCombo(ComboBox productCombo)
+        {
+            string productName = "";
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand fetchProductName = new SQLiteCommand("SELECT productName FROM Product", connection);
+                SQLiteDataReader readProduct = fetchProductName.ExecuteReader();
+
+                while (readProduct.Read())
+                {
+                    productName = readProduct["productName"].ToString();
+                    productCombo.Items.Add(productName);
+                }
+            }
+        }
+
     }
 }

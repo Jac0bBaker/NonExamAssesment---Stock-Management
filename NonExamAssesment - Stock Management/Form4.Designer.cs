@@ -34,11 +34,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.deliveryStockItemText = new System.Windows.Forms.TextBox();
-            this.deliverySupplierText = new System.Windows.Forms.TextBox();
             this.deliveryDateText = new System.Windows.Forms.TextBox();
             this.deliveryQuantityText = new System.Windows.Forms.TextBox();
             this.deliverySubmitButton = new System.Windows.Forms.Button();
+            this.DeliverySupplierCombo = new System.Windows.Forms.ComboBox();
+            this.DeliveryProductCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -91,20 +91,6 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Delivery Quantity";
             // 
-            // deliveryStockItemText
-            // 
-            this.deliveryStockItemText.Location = new System.Drawing.Point(150, 150);
-            this.deliveryStockItemText.Name = "deliveryStockItemText";
-            this.deliveryStockItemText.Size = new System.Drawing.Size(150, 22);
-            this.deliveryStockItemText.TabIndex = 6;
-            // 
-            // deliverySupplierText
-            // 
-            this.deliverySupplierText.Location = new System.Drawing.Point(125, 100);
-            this.deliverySupplierText.Name = "deliverySupplierText";
-            this.deliverySupplierText.Size = new System.Drawing.Size(150, 22);
-            this.deliverySupplierText.TabIndex = 7;
-            // 
             // deliveryDateText
             // 
             this.deliveryDateText.Location = new System.Drawing.Point(160, 200);
@@ -131,16 +117,32 @@
             this.deliverySubmitButton.UseVisualStyleBackColor = true;
             this.deliverySubmitButton.Click += new System.EventHandler(this.deliverySubmitButton_Click);
             // 
+            // DeliverySupplierCombo
+            // 
+            this.DeliverySupplierCombo.FormattingEnabled = true;
+            this.DeliverySupplierCombo.Location = new System.Drawing.Point(125, 100);
+            this.DeliverySupplierCombo.Name = "DeliverySupplierCombo";
+            this.DeliverySupplierCombo.Size = new System.Drawing.Size(160, 24);
+            this.DeliverySupplierCombo.TabIndex = 12;
+            // 
+            // DeliveryProductCombo
+            // 
+            this.DeliveryProductCombo.FormattingEnabled = true;
+            this.DeliveryProductCombo.Location = new System.Drawing.Point(150, 150);
+            this.DeliveryProductCombo.Name = "DeliveryProductCombo";
+            this.DeliveryProductCombo.Size = new System.Drawing.Size(150, 24);
+            this.DeliveryProductCombo.TabIndex = 13;
+            // 
             // DeliveryDataEntryPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 503);
+            this.Controls.Add(this.DeliveryProductCombo);
+            this.Controls.Add(this.DeliverySupplierCombo);
             this.Controls.Add(this.deliverySubmitButton);
             this.Controls.Add(this.deliveryQuantityText);
             this.Controls.Add(this.deliveryDateText);
-            this.Controls.Add(this.deliverySupplierText);
-            this.Controls.Add(this.deliveryStockItemText);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -162,10 +164,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox deliveryStockItemText;
-        private System.Windows.Forms.TextBox deliverySupplierText;
         private System.Windows.Forms.TextBox deliveryDateText;
         private System.Windows.Forms.TextBox deliveryQuantityText;
         private System.Windows.Forms.Button deliverySubmitButton;
+        private System.Windows.Forms.ComboBox DeliverySupplierCombo;
+        private System.Windows.Forms.ComboBox DeliveryProductCombo;
     }
 }

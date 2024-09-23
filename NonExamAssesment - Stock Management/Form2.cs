@@ -17,7 +17,7 @@ namespace NonExamAssesment___Stock_Management
         public StockEntryPage()
         {
             InitializeComponent();
-            
+            check.populateSupplierCombo(SupplierNameCombo);
         }
 
         public static performChecks check = new performChecks();
@@ -46,13 +46,13 @@ namespace NonExamAssesment___Stock_Management
 
         private void submitStockEntryButton_Click(object sender, EventArgs e)
         {
-            int supplierID = check.findSupplierID(SupplierNameText.Text);
+            int supplierID = check.findSupplierID(SupplierNameCombo.Text);
 
             if (check.checkIntFormat(MinStockLevelText.Text) == true &&
                 check.checkDoubleFormat(ItemCostText.Text) == true &&
                 check.checkDoubleFormat(ItemPriceText.Text) == true &&
-                check.checkEmptyCombo(UnitTypeCombo.Text) == false &&
-                check.checkSupplierExsists(SupplierNameText.Text)
+                check.checkEmptyCombo(UnitTypeCombo.Text) == false //&&
+                //check.checkSupplierExsists(SupplierNameText.Text)
                 )
             {
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))

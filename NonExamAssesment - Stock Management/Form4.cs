@@ -17,6 +17,8 @@ namespace NonExamAssesment___Stock_Management
         {
             InitializeComponent();
             deliveryDateText.AppendText(todayDate);
+            check.populateProductCombo(DeliveryProductCombo);
+            check.populateSupplierCombo(DeliverySupplierCombo);
         }
 
         public performChecks check = new performChecks();
@@ -25,11 +27,11 @@ namespace NonExamAssesment___Stock_Management
 
         private void deliverySubmitButton_Click(object sender, EventArgs e)
         {
-            int productID = check.findProductID(deliveryStockItemText.Text);
-            int supplierID = check.findSupplierID(deliverySupplierText.Text);
+            int productID = check.findProductID(DeliveryProductCombo.Text);
+            int supplierID = check.findSupplierID(DeliverySupplierCombo.Text);
 
-            if ((check.checkSupplierExsists(deliverySupplierText.Text) == true) &&
-                (check.checkProductExists(deliveryStockItemText.Text) == true) &&
+            if (//(check.checkSupplierExsists(deliverySupplierText.Text) == true) &&
+                //(check.checkProductExists(deliveryStockItemText.Text) == true) &&
                 (check.checkDate(deliveryDateText.Text) == true) &&
                 (check.checkIntFormat(deliveryQuantityText.Text) == true)
                 )

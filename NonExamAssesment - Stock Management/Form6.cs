@@ -17,6 +17,7 @@ namespace NonExamAssesment___Stock_Management
         {
             InitializeComponent();
             UsageDateText.AppendText(todayDate);
+            check.populateProductCombo(UsageProductCombo);
         }
 
         public performChecks check = new performChecks();
@@ -25,9 +26,9 @@ namespace NonExamAssesment___Stock_Management
 
         private void UsageStockItemButton_Click(object sender, EventArgs e)
         {
-            int productID = check.findProductID(UsageStockItemText.Text);
+            int productID = check.findProductID(UsageProductCombo.Text);
 
-            if ((check.checkProductExists(UsageStockItemButton.Text) == true) &&
+            if (//(check.checkProductExists(UsageProductCombo.Text) == true) &&
                 (check.checkDate(UsageDateText.Text) == true) &&
                 (check.checkIntFormat(UsageQuantityText.Text) == true)
                 )
