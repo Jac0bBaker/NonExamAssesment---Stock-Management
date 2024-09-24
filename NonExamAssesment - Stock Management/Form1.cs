@@ -84,6 +84,7 @@ namespace NonExamAssesment___Stock_Management
 
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
+                connection.Open();
                 SQLiteCommand checkEachDelivery = new SQLiteCommand($"SELECT deliveryQuantity FROM Delivery WHERE productID = {productID}", connection);
                 SQLiteDataReader readDeliveries = checkEachDelivery.ExecuteReader();
 
@@ -101,6 +102,7 @@ namespace NonExamAssesment___Stock_Management
             
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
+                connection.Open();
                 SQLiteCommand checkEachSale = new SQLiteCommand($"SELECT salesQuantity FROM salesData WHERE productID = {productID}", connection);
                 SQLiteDataReader readSales = checkEachSale.ExecuteReader();
 
@@ -118,6 +120,7 @@ namespace NonExamAssesment___Stock_Management
 
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
+                connection.Open();
                 SQLiteCommand checkEachUse = new SQLiteCommand($"SELECT usageQuantity FROM usageData WHERE productID = {productID}", connection);
                 SQLiteDataReader readUsage = checkEachUse.ExecuteReader();
 
