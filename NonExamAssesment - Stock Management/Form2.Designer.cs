@@ -220,7 +220,7 @@
             this.OrderFrequencyCombo.Items.AddRange(new object[] {
             "Daily",
             "Monthly",
-            "On Demand"});
+            "on-demand"});
             this.OrderFrequencyCombo.Location = new System.Drawing.Point(185, 400);
             this.OrderFrequencyCombo.Name = "OrderFrequencyCombo";
             this.OrderFrequencyCombo.Size = new System.Drawing.Size(150, 24);

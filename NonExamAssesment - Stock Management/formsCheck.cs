@@ -177,22 +177,26 @@ namespace NonExamAssesment___Stock_Management
 
         public int findSupplierID(string supplier)
         {
-            int supplierID = 0; ;
+            int supplierID = 0;
             string supplierName = "";
 
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand selectName = new SQLiteCommand("SELECT supplierID, supplierName FROM supplier", connection);
-                SQLiteDataReader readSupplier = selectName.ExecuteReader();
-                while (readSupplier.Read())
+                using (SQLiteCommand selectName = new SQLiteCommand("SELECT supplierID, supplierName FROM supplier", connection))
                 {
-                    supplierID = int.Parse(readSupplier["supplierID"].ToString());
-                    supplierName = readSupplier["supplierName"].ToString();
-
-                    if (supplierName.ToUpper() == supplier.ToUpper())
+                    using (SQLiteDataReader readSupplier = selectName.ExecuteReader())
                     {
-                        break;
+                        while (readSupplier.Read())
+                        {
+                            supplierID = int.Parse(readSupplier["supplierID"].ToString());
+                            supplierName = readSupplier["supplierName"].ToString();
+
+                            if (supplierName.ToUpper() == supplier.ToUpper())
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -207,16 +211,20 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand selectName = new SQLiteCommand("SELECT productID, productName FROM product", connection);
-                SQLiteDataReader readProduct = selectName.ExecuteReader();
-                while (readProduct.Read())
+                using (SQLiteCommand selectName = new SQLiteCommand("SELECT productID, productName FROM product", connection))
                 {
-                    productID = int.Parse(readProduct["productID"].ToString());
-                    productName = readProduct["productName"].ToString();
-
-                    if (productName.ToUpper() == product.ToUpper())
+                    using (SQLiteDataReader readProduct = selectName.ExecuteReader())
                     {
-                        break;
+                        while (readProduct.Read())
+                        {
+                            productID = int.Parse(readProduct["productID"].ToString());
+                            productName = readProduct["productName"].ToString();
+
+                            if (productName.ToUpper() == product.ToUpper())
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
             }
