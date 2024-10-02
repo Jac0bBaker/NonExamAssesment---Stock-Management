@@ -126,7 +126,7 @@ namespace NonExamAssesment___Stock_Management
 
                 while (readUsage.Read())
                 {
-                    totalUsage += int.Parse(readUsage["salesQuantity"].ToString());
+                    totalUsage += int.Parse(readUsage["usageQuantity"].ToString());
                 }
             }
             return (calculateDeliveryQuantity(productID) - totalUsage);

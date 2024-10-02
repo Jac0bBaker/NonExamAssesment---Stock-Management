@@ -275,15 +275,18 @@ namespace NonExamAssesment___Stock_Management
             {
                 connection.Open();
                 SQLiteCommand fetchProductName = new SQLiteCommand($"SELECT productName, onReport FROM Product", connection);
-                SQLiteDataReader readProduct = fetchProductName.ExecuteReader();
 
-                while (readProduct.Read())
+                using (SQLiteDataReader readProduct = fetchProductName.ExecuteReader())
                 {
-                    if (readProduct["productName"].ToString() == product)
+                    while (readProduct.Read())
                     {
-                        if (readProduct["onReport"].ToString() == "yes")
+                        if (readProduct["productName"].ToString() == product)
                         {
-                            onSalesReport = true;
+                            if (readProduct["onReport"].ToString() == "yes")
+                            {
+                                onSalesReport = true;
+                                break;
+                            }
                         }
                     }
                 }

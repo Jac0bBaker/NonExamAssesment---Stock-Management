@@ -36,10 +36,11 @@ namespace NonExamAssesment___Stock_Management
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
                 {
                     connection.Open();
-                    SQLiteCommand insertSale = new SQLiteCommand("INSERT INTO salesData(productID, salesDate, salesQuantity) " +
-                       "VALUES ('" + productID + "', '" + salesDateText.Text + "', '" + int.Parse(salesQuantityText.Text) + "')", connection);
-                    insertSale.ExecuteNonQuery();
-
+                    using (SQLiteCommand insertSale = new SQLiteCommand("INSERT INTO salesData(productID, salesDate, salesQuantity) " +
+                       "VALUES ('" + productID + "', '" + salesDateText.Text + "', '" + int.Parse(salesQuantityText.Text) + "')", connection))
+                    {
+                        insertSale.ExecuteNonQuery();
+                    }
                     MessageBox.Show("Sale successfully added.");
                 }
             }
