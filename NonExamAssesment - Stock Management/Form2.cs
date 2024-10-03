@@ -46,7 +46,8 @@ namespace NonExamAssesment___Stock_Management
 
         private void submitStockEntryButton_Click(object sender, EventArgs e)
         {
-            int supplierID = check.findSupplierID(SupplierNameCombo.Text);
+            //int supplierID = check.findSupplierID(SupplierNameCombo.Text);
+            int supplierID = 7;
 
             if (check.checkIntFormat(MinStockLevelText.Text) == true &&
                 check.checkDoubleFormat(ItemCostText.Text) == true &&
@@ -57,11 +58,11 @@ namespace NonExamAssesment___Stock_Management
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
                 {
                     connection.Open();
-                    using (SQLiteCommand insertProduct = new SQLiteCommand("INSERT INTO Product(productName, supplierID, productCost, productPrice, minStockLevel, unitType, orderFrequency, onReport) " +
-                        "VALUES ('" + ItemNameText.Text + "', '" + supplierID + "', '" + double.Parse(ItemCostText.Text) + "', '" + double.Parse(ItemPriceText.Text) + "', '" + int.Parse(MinStockLevelText.Text) + "', '" + UnitTypeCombo.Text + "', '" + OrderFrequencyCombo.Text + "', '" + onSalesReport(OnSalesReportCheck.Checked) + "')", connection))
-                    {
-                        insertProduct.ExecuteNonQuery();
-                    }
+                    SQLiteCommand insertProduct = new SQLiteCommand("INSERT INTO Product(productName, supplierID, productCost, productPrice, minStockLevel, unitType, orderFrequency, onReport) " +
+                        "VALUES ('" + ItemNameText.Text + "', '" + supplierID + "', '" + double.Parse(ItemCostText.Text) + "', '" + double.Parse(ItemPriceText.Text) + "', '" + int.Parse(MinStockLevelText.Text) + "', '" + UnitTypeCombo.Text + "', '" + OrderFrequencyCombo.Text + "', '" + onSalesReport(OnSalesReportCheck.Checked) + "')", connection);
+                    
+                    insertProduct.ExecuteNonQuery();
+                   
                 }
                 MessageBox.Show("Stock item successfully added.");
             }

@@ -71,9 +71,18 @@ namespace NonExamAssesment___Stock_Management
             
         }
 
+        static int calculateWastage(int productID)
+        {
+            return 0;
+        }
+
         private void WastageSubmitButton_Click(object sender, EventArgs e)
         {
-            
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand("SELECT productID FROM Product WHERE ", connection);
+            }
         }
 
         //---------------------------------------------------------------------------------------------
@@ -85,7 +94,8 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkEachDelivery = new SQLiteCommand($"SELECT deliveryQuantity FROM Delivery WHERE productID = {productID}", connection);
+                SQLiteCommand checkEachDelivery = new SQLiteCommand($"SELECT deliveryQuantity FROM Delivery WHERE productID = $productID", connection);
+                checkEachDelivery.Parameters.AddWithValue("$productID", $"{productID}");
                 SQLiteDataReader readDeliveries = checkEachDelivery.ExecuteReader();
 
                 while (readDeliveries.Read())
@@ -103,7 +113,8 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkEachSale = new SQLiteCommand($"SELECT salesQuantity FROM salesData WHERE productID = {productID}", connection);
+                SQLiteCommand checkEachSale = new SQLiteCommand($"SELECT salesQuantity FROM salesData WHERE productID = $productID", connection);
+                checkEachSale.Parameters.AddWithValue("$productID", $"{productID}");
                 SQLiteDataReader readSales = checkEachSale.ExecuteReader();
 
                 while (readSales.Read())
@@ -121,7 +132,8 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkEachUse = new SQLiteCommand($"SELECT usageQuantity FROM usageData WHERE productID = {productID}", connection);
+                SQLiteCommand checkEachUse = new SQLiteCommand($"SELECT usageQuantity FROM usageData WHERE productID = $productID", connection);
+                checkEachUse.Parameters.AddWithValue("$productID", $"{productID}");
                 SQLiteDataReader readUsage = checkEachUse.ExecuteReader();
 
                 while (readUsage.Read())
@@ -132,6 +144,11 @@ namespace NonExamAssesment___Stock_Management
             return (calculateDeliveryQuantity(productID) - totalUsage);
         }
 
+        public bool checkIfUpdate()
+        {
+            return false;
+        }
+
         private void AlertsRefreshButton_Click(object sender, EventArgs e)
         {
             //next to be added is feature to remove items which have been reordered
@@ -139,32 +156,28 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkOrderFrequency = new SQLiteCommand("SELECT productName, orderFrequency, minStockLevel, onReport FROM Product", connection);
+                SQLiteCommand checkOrderFrequency = new SQLiteCommand("SELECT productName, orderFrequency, minStockLevel, onReport FROM Product WHERE orderFrequency = $orderFrequency", connection);
+                checkOrderFrequency.Parameters.AddWithValue("$orderFrequency", "on-demand");
                 SQLiteDataReader readProduct = checkOrderFrequency.ExecuteReader();
 
                 while (readProduct.Read())
                 {
-                    if (readProduct["orderFrequency"].ToString() == "on-demand")
+                    int productID = check.findProductID(readProduct["productName"].ToString());
+                    if (readProduct["onReport"].ToString() == "yes")
                     {
-                        int productID = check.findProductID(readProduct["productName"].ToString());
-                        if (readProduct["onReport"].ToString() == "yes")
+                        if (int.Parse(readProduct["minStockLevel"].ToString()) >= calculateQuantitySales(productID))
                         {
-                            if (int.Parse(readProduct["minStockLevel"].ToString()) >= calculateQuantitySales(productID))
-                            {
-                                AlertsList.Items.Add(readProduct["productName"].ToString());
-                            }
+                            AlertsList.Items.Add(readProduct["productName"].ToString());
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (int.Parse(readProduct["minStockLevel"].ToString()) >= calculateQuantityUsage(productID))
                         {
-                            if (int.Parse(readProduct["minStockLevel"].ToString()) >= calculateQuantityUsage(productID))
-                            {
-                                AlertsList.Items.Add(readProduct["productName"].ToString());
-                            }
+                            AlertsList.Items.Add(readProduct["productName"].ToString());
                         }
-                        
                     }
                 }
-
             }
         }
     }

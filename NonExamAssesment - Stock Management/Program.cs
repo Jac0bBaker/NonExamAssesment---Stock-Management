@@ -17,8 +17,6 @@ namespace NonExamAssesment___Stock_Management
         public static StockUsageEntryPage stockUsageEntryP = new StockUsageEntryPage();
     }
 
-    
-
     internal static class Program
     {
         /// <summary>
