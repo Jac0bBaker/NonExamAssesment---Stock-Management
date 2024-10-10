@@ -53,10 +53,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.PredictionStockItemText = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.PredictionSubmitButton = new System.Windows.Forms.Button();
             this.FuturePredictionButton = new System.Windows.Forms.Button();
+            this.PredictionStockItemCombo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -339,14 +339,6 @@
             this.label11.TabIndex = 23;
             this.label11.Text = "Next day sale";
             // 
-            // PredictionStockItemText
-            // 
-            this.PredictionStockItemText.Location = new System.Drawing.Point(707, 505);
-            this.PredictionStockItemText.Margin = new System.Windows.Forms.Padding(4);
-            this.PredictionStockItemText.Name = "PredictionStockItemText";
-            this.PredictionStockItemText.Size = new System.Drawing.Size(132, 22);
-            this.PredictionStockItemText.TabIndex = 24;
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(973, 505);
@@ -366,6 +358,7 @@
             this.PredictionSubmitButton.TabIndex = 26;
             this.PredictionSubmitButton.Text = "Submit";
             this.PredictionSubmitButton.UseVisualStyleBackColor = false;
+            this.PredictionSubmitButton.Click += new System.EventHandler(this.PredictionSubmitButton_Click);
             // 
             // FuturePredictionButton
             // 
@@ -379,16 +372,24 @@
             this.FuturePredictionButton.Text = "View Future Predictions";
             this.FuturePredictionButton.UseVisualStyleBackColor = false;
             // 
+            // PredictionStockItemCombo
+            // 
+            this.PredictionStockItemCombo.FormattingEnabled = true;
+            this.PredictionStockItemCombo.Location = new System.Drawing.Point(710, 505);
+            this.PredictionStockItemCombo.Name = "PredictionStockItemCombo";
+            this.PredictionStockItemCombo.Size = new System.Drawing.Size(130, 24);
+            this.PredictionStockItemCombo.TabIndex = 28;
+            // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1181, 628);
+            this.Controls.Add(this.PredictionStockItemCombo);
             this.Controls.Add(this.FuturePredictionButton);
             this.Controls.Add(this.PredictionSubmitButton);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.PredictionStockItemText);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -449,10 +450,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox PredictionStockItemText;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button PredictionSubmitButton;
         private System.Windows.Forms.Button FuturePredictionButton;
+        private System.Windows.Forms.ComboBox PredictionStockItemCombo;
     }
 }
 

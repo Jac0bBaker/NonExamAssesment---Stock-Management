@@ -18,7 +18,6 @@ namespace NonExamAssesment___Stock_Management
             InitializeComponent();
             deliveryDateText.AppendText(todayDate);
             check.populateProductCombo(DeliveryProductCombo);
-            check.populateSupplierCombo(DeliverySupplierCombo);
         }
 
         public performChecks check = new performChecks();
@@ -28,7 +27,6 @@ namespace NonExamAssesment___Stock_Management
         private void deliverySubmitButton_Click(object sender, EventArgs e)
         {
             int productID = check.findProductID(DeliveryProductCombo.Text);
-            int supplierID = check.findSupplierID(DeliverySupplierCombo.Text);
 
             if ((check.checkDate(deliveryDateText.Text) == true) &&
                 (check.checkIntFormat(deliveryQuantityText.Text) == true)
@@ -37,8 +35,8 @@ namespace NonExamAssesment___Stock_Management
                 using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
                 {
                     connection.Open();
-                    SQLiteCommand insertDelivery = new SQLiteCommand("INSERT INTO Supplier(productID, deliveryDate, deliveryQuantity) " +
-                       "VALUES ('" + productID + "', '" + supplierID + "', '" + deliveryDateText.Text + "', '" + int.Parse(deliveryQuantityText.Text) + "')", connection);
+                    SQLiteCommand insertDelivery = new SQLiteCommand("INSERT INTO Delivery(productID, deliveryDate, deliveryQuantity) " +
+                       "VALUES ('" + productID + "', '" + deliveryDateText.Text + "', '" + int.Parse(deliveryQuantityText.Text) + "')", connection);
                     insertDelivery.ExecuteNonQuery();
 
                     MessageBox.Show("Delivery successfully added.");

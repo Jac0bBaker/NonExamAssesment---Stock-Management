@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace NonExamAssesment___Stock_Management
         public HomePage()
         {
             InitializeComponent();
+            check.populateProductCombo(PredictionStockItemCombo);
         }
 
         public performChecks check = new performChecks();
@@ -81,7 +83,8 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand command = new SQLiteCommand("SELECT productID FROM Product WHERE ", connection);
+                SQLiteCommand command = new SQLiteCommand("SELECT productID FROM Product WHERE orderFrequency = $orderFrequency", connection);
+                command.Parameters.AddWithValue("$orderFrequency", "daily");
             }
         }
 
@@ -144,14 +147,9 @@ namespace NonExamAssesment___Stock_Management
             return (calculateDeliveryQuantity(productID) - totalUsage);
         }
 
-        public bool checkIfUpdate()
-        {
-            return false;
-        }
-
         private void AlertsRefreshButton_Click(object sender, EventArgs e)
         {
-            //next to be added is feature to remove items which have been reordered
+            AlertsList.Items.Clear();
 
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
@@ -177,6 +175,98 @@ namespace NonExamAssesment___Stock_Management
                             AlertsList.Items.Add(readProduct["productName"].ToString());
                         }
                     }
+                }
+            }
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------------
+
+        static void populateMatrices(List<int> quantity)
+        {
+            //matrices M and B
+            double[,] matrixM = new double[4, 4];
+            double[,] matrixB = new double[1, 4];
+
+            double[,] matrixM0 = new double[4, 4];
+            double[,] matrixM1 = new double[4, 4];
+            double[,] matrixM2 = new double[4, 4];
+            double[,] matrixM3 = new double[4, 4];
+
+            double sum = 0;
+
+            //populate matrixM:
+            for (int row = 0; row < 4; row++)
+            {
+                for (int column = 0; column < 4; column++)
+                {
+                    for (int day = 0; day < quantity.Count; day++)
+                    {
+                        sum += Math.Pow(day, column + row);
+                    }
+                    matrixM[column, row] = sum;
+                    sum = 0;
+                }
+            }
+
+            //populate matrixB
+            int dayOfWeek = 0;
+
+            for (int row = 0; row < 4; row++)
+            {
+                for (int q = 0; q < quantity.Count; q++)
+                {
+                    sum += Math.Pow(dayOfWeek, row) * quantity[q];
+                    dayOfWeek++;
+                }
+                matrixB[0, row] = sum;
+                sum = 0;
+                dayOfWeek = 0;
+            }
+        }
+
+        private void PredictionSubmitButton_Click(object sender, EventArgs e)
+        {
+            List<int> quantity = new List<int>();
+
+            if (check.checkOnSalesReport(PredictionStockItemCombo.Text) == true)
+            {
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+                {
+                    connection.Open();
+                    SQLiteCommand fetchSales = new SQLiteCommand($@"
+                    SELECT salesQuantity
+                    FROM salesData
+                    WHERE salesData.productID = (SELECT productID FROM Product WHERE productName = '{PredictionStockItemCombo.Text}')
+                    ", connection);
+                    SQLiteDataReader readSales = fetchSales.ExecuteReader();
+
+                    while (readSales.Read())
+                    {
+                        quantity.Add(int.Parse(readSales["salesQuantity"].ToString()));
+                    }
+
+                    populateMatrices(quantity);
+                }
+            }
+
+            else
+            {
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+                {
+                    connection.Open();
+                    SQLiteCommand fetchUsage = new SQLiteCommand($@"
+                    SELECT usageQuantity
+                    FROM usageData
+                    WHERE usageData.productID = (SELECT productID FROM Product WHERE productName = '{PredictionStockItemCombo.Text}')
+                    ", connection);
+                    SQLiteDataReader readUsage = fetchUsage.ExecuteReader();
+
+                    while (readUsage.Read())
+                    {
+                        quantity.Add(int.Parse(readUsage["usageQuantity"].ToString()));
+                    }
+
+                    populateMatrices(quantity);
                 }
             }
         }
