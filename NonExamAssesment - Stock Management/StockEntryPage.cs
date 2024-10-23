@@ -46,8 +46,7 @@ namespace NonExamAssesment___Stock_Management
 
         private void submitStockEntryButton_Click(object sender, EventArgs e)
         {
-            //int supplierID = check.findSupplierID(SupplierNameCombo.Text);
-            int supplierID = 7;
+            int supplierID = check.findSupplierID(SupplierNameCombo.Text);
 
             if (check.checkIntFormat(MinStockLevelText.Text) == true &&
                 check.checkDoubleFormat(ItemCostText.Text) == true &&
