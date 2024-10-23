@@ -15,6 +15,9 @@ namespace NonExamAssesment___Stock_Management
         public static DeliveryDataEntryPage deliveryDataEntryP = new DeliveryDataEntryPage();
         public static SalesDataEntryPage salesDataEntryP = new SalesDataEntryPage();
         public static StockUsageEntryPage stockUsageEntryP = new StockUsageEntryPage();
+        public static StockQueryPage stockQueryP = new StockQueryPage();
+        public static FullStockRecord fullStockRecordP = new FullStockRecord();
+        public static SupplierReport supplierReportP = new SupplierReport();
     }
 
     internal static class Program

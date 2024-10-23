@@ -39,7 +39,17 @@ namespace NonExamAssesment___Stock_Management
 
         private void StockQueryButton_Click(object sender, EventArgs e)
         {
-            
+            (new StockQueryPage()).Show();
+        }
+
+        private void StockRecordButton_Click(object sender, EventArgs e)
+        {
+            (new FullStockRecord()).Show();
+        }
+
+        private void SupplierReportButton_Click(object sender, EventArgs e)
+        {
+            (new SupplierReport()).Show();
         }
 
         private void AddStockItemButton_Click(object sender, EventArgs e)
