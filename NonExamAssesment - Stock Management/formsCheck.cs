@@ -178,28 +178,18 @@ namespace NonExamAssesment___Stock_Management
         public int findSupplierID(string supplier)
         {
             int supplierID = 0;
-            string supplierName = "";
 
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                using (SQLiteCommand selectName = new SQLiteCommand("SELECT supplierID, supplierName FROM supplier", connection))
+                SQLiteCommand selectName = new SQLiteCommand($"SELECT supplierID FROM supplier WHERE supplierName = '{supplier}'", connection);
+                SQLiteDataReader readSupplier = selectName.ExecuteReader();
+                while (readSupplier.Read())
                 {
-                    using (SQLiteDataReader readSupplier = selectName.ExecuteReader())
-                    {
-                        while (readSupplier.Read())
-                        {
-                            supplierID = int.Parse(readSupplier["supplierID"].ToString());
-                            supplierName = readSupplier["supplierName"].ToString();
-
-                            if (supplierName.ToUpper() == supplier.ToUpper())
-                            {
-                                break;
-                            }
-                        }
-                    }
+                    supplierID = int.Parse(readSupplier["supplierID"].ToString());
                 }
             }
+
             return supplierID;
         }
 
@@ -208,7 +198,7 @@ namespace NonExamAssesment___Stock_Management
             int productID = 0; ;
             string productName = "";
 
-            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            /*using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
                 using (SQLiteCommand selectName = new SQLiteCommand("SELECT productID, productName FROM product", connection))
@@ -227,7 +217,19 @@ namespace NonExamAssesment___Stock_Management
                         }
                     }
                 }
+            }*/
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand selectName = new SQLiteCommand($"SELECT productID FROM Product WHERE productName = '{product}'", connection);
+                SQLiteDataReader readProduct = selectName.ExecuteReader();
+                while (readProduct.Read())
+                {
+                    productID = int.Parse(readProduct["productID"].ToString());
+                }
             }
+
             return productID;
         }
 
@@ -271,7 +273,7 @@ namespace NonExamAssesment___Stock_Management
         {
             bool onSalesReport = false;
 
-            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            /*using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
                 SQLiteCommand fetchProductName = new SQLiteCommand($"SELECT productName, onReport FROM Product", connection);
@@ -288,6 +290,20 @@ namespace NonExamAssesment___Stock_Management
                                 break;
                             }
                         }
+                    }
+                }
+            }*/
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
+            {
+                connection.Open();
+                SQLiteCommand fetchProductName = new SQLiteCommand($"SELECT onReport FROM Product WHERE productName = '{product}'", connection);
+                SQLiteDataReader readProduct = fetchProductName.ExecuteReader();
+                while (readProduct.Read())
+                {
+                    if (readProduct["onReport"].ToString() == "yes")
+                    {
+                        onSalesReport = true;
                     }
                 }
             }

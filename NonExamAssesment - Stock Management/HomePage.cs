@@ -193,6 +193,8 @@ namespace NonExamAssesment___Stock_Management
 
         static void populateMatrices(List<int> quantity)
         {
+            //to fix: change order of row and column
+
             //matrices M and B
             double[,] matrixM = new double[4, 4];
             double[,] matrixB = new double[1, 4];
@@ -232,6 +234,24 @@ namespace NonExamAssesment___Stock_Management
                 sum = 0;
                 dayOfWeek = 0;
             }
+
+            Array.Copy(matrixM, matrixM0, 16);
+            Array.Copy(matrixM, matrixM1, 16);
+            Array.Copy(matrixM, matrixM2, 16);
+            Array.Copy(matrixM, matrixM3, 16);
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    MessageBox.Show(matrixM0[i, j].ToString());
+                }
+            }
+
+            matrixM0[0, 0] = matrixB[0, 0];
+            matrixM0[0, 1] = matrixB[0, 1];
+            matrixM0[0, 2] = matrixB[0, 2];
+            matrixM0[0, 3] = matrixB[0, 3];
         }
 
         private void PredictionSubmitButton_Click(object sender, EventArgs e)
