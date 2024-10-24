@@ -193,11 +193,9 @@ namespace NonExamAssesment___Stock_Management
 
         static void populateMatrices(List<int> quantity)
         {
-            //to fix: change order of row and column
-
             //matrices M and B
             double[,] matrixM = new double[4, 4];
-            double[,] matrixB = new double[1, 4];
+            double[,] matrixB = new double[4, 1];
 
             double[,] matrixM0 = new double[4, 4];
             double[,] matrixM1 = new double[4, 4];
@@ -215,7 +213,7 @@ namespace NonExamAssesment___Stock_Management
                     {
                         sum += Math.Pow(day, column + row);
                     }
-                    matrixM[column, row] = sum;
+                    matrixM[row, column] = sum;
                     sum = 0;
                 }
             }
@@ -230,7 +228,7 @@ namespace NonExamAssesment___Stock_Management
                     sum += Math.Pow(dayOfWeek, row) * quantity[q];
                     dayOfWeek++;
                 }
-                matrixB[0, row] = sum;
+                matrixB[row, 0] = sum;
                 sum = 0;
                 dayOfWeek = 0;
             }
@@ -240,18 +238,36 @@ namespace NonExamAssesment___Stock_Management
             Array.Copy(matrixM, matrixM2, 16);
             Array.Copy(matrixM, matrixM3, 16);
 
-            for (int i = 0; i < 4; i++)
+            //Matrix M0
+            for (int row = 0; row < 4; row++)
+            {
+                matrixM0[row, 0] = matrixB[row, 0];
+            }
+            //Matrix M1
+            for (int row = 0; row < 4; row++)
+            {
+                matrixM0[row, 1] = matrixB[row, 0];
+            }
+            //Matrix M2
+            for (int row = 0; row < 4; row++)
+            {
+                matrixM0[row, 2] = matrixB[row, 0];
+            }
+            //Matrix M3
+            for (int row = 0; row < 4; row++)
+            {
+                matrixM0[row, 3] = matrixB[row, 0];
+            }
+
+
+            /*for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
                     MessageBox.Show(matrixM0[i, j].ToString());
                 }
-            }
+            }*/
 
-            matrixM0[0, 0] = matrixB[0, 0];
-            matrixM0[0, 1] = matrixB[0, 1];
-            matrixM0[0, 2] = matrixB[0, 2];
-            matrixM0[0, 3] = matrixB[0, 3];
         }
 
         private void PredictionSubmitButton_Click(object sender, EventArgs e)
