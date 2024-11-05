@@ -196,28 +196,6 @@ namespace NonExamAssesment___Stock_Management
         public int findProductID(string product)
         {
             int productID = 0; ;
-            string productName = "";
-
-            /*using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
-            {
-                connection.Open();
-                using (SQLiteCommand selectName = new SQLiteCommand("SELECT productID, productName FROM product", connection))
-                {
-                    using (SQLiteDataReader readProduct = selectName.ExecuteReader())
-                    {
-                        while (readProduct.Read())
-                        {
-                            productID = int.Parse(readProduct["productID"].ToString());
-                            productName = readProduct["productName"].ToString();
-
-                            if (productName.ToUpper() == product.ToUpper())
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-            }*/
 
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
