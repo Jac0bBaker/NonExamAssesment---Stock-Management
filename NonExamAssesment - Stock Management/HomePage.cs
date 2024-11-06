@@ -306,5 +306,10 @@ namespace NonExamAssesment___Stock_Management
                 }
             }
         }
+
+        private void FuturePredictionButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

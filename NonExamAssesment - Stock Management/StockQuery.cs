@@ -57,10 +57,10 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand fetchSalesData = new SQLiteCommand(@"
-                SELECT salesQuantity, strftime('%Y-%m-%d', salesDate) AS salesDateString
+                SQLiteCommand fetchSalesData = new SQLiteCommand($@"
+                SELECT salesQuantity, salesDate AS salesDateString
                 FROM salesData
-                WHERE salesData.productID = (SELECT productID FROM Product WHERE productName = 'sandwiches')
+                WHERE salesData.productID = (SELECT productID FROM Product WHERE productName = '{QueryProductCombo.Text}')
                 ORDER BY salesDateString", connection);
                 SQLiteDataReader readSalesData = fetchSalesData.ExecuteReader();
                 while (readSalesData.Read())
@@ -86,10 +86,10 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand fetchDeliveryData = new SQLiteCommand(@"
-                SELECT deliveryQuantity, strftime('%Y-%m-%d', deliveryDate) AS deliveryDateString
+                SQLiteCommand fetchDeliveryData = new SQLiteCommand($@"
+                SELECT deliveryQuantity, deliveryDate AS deliveryDateString
                 FROM Delivery
-                WHERE Delivery.productID = (SELECT productID FROM Product WHERE productName = 'sandwiches')
+                WHERE Delivery.productID = (SELECT productID FROM Product WHERE productName = '{QueryProductCombo.Text}')
                 ORDER BY deliveryDateString", connection);
                 SQLiteDataReader readDeliveryData = fetchDeliveryData.ExecuteReader();
                 while (readDeliveryData.Read())
