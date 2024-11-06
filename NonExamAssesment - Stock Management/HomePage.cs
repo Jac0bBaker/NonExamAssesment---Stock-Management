@@ -5,10 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -192,93 +190,8 @@ namespace NonExamAssesment___Stock_Management
         }
 
         //----------------------------------------------------------------------------------------------------------------------------------------------------
-        static double determinant3x3(double[,] matrix)
-        {
-            double determinant = (
-                matrix[0, 0] * ((matrix[1, 1] * matrix[2, 2]) - (matrix[1, 2] * matrix[2, 1])) -
-                matrix[0, 1] * ((matrix[1, 0] * matrix[2, 2]) - (matrix[1, 2] * matrix[2, 0])) +
-                matrix[0, 2] * ((matrix[1, 0] * matrix[2, 1]) - (matrix[1, 1] * matrix[2, 0]))
-                );
-            return determinant;
-        }
 
-        static double determinant4x4(double[,] matrix)
-        {
-            double[,] tempMatrix1 = new double[3, 3];
-            double[,] tempMatrix2 = new double[3, 3];
-            double[,] tempMatrix3 = new double[3, 3];
-            double[,] tempMatrix4 = new double[3, 3];
-            int avoidColumn = 0;
-            int tempRow = 0;
-            int tempColumn = 0;
-
-            while (avoidColumn < 4)
-            {
-                for (int row = 1; row < 4; row++)
-                {
-                    for (int column = 0; column < 4; column++)
-                    {
-                        switch (avoidColumn)
-                        {
-                            case 0:
-                                if (column != avoidColumn)
-                                {
-                                    tempMatrix1[tempRow, tempColumn] = matrix[row, column];
-                                    tempColumn++;
-                                }
-                                break;
-                            case 1:
-                                if (column != avoidColumn)
-                                {
-                                    tempMatrix2[tempRow, tempColumn] = matrix[row, column];
-                                    tempColumn++;
-                                }
-                                break;
-                            case 2:
-                                if (column != avoidColumn)
-                                {
-                                    tempMatrix3[tempRow, tempColumn] = matrix[row, column];
-                                    tempColumn++;
-                                }
-                                break;
-                            case 3:
-                                if (column != avoidColumn)
-                                {
-                                    tempMatrix4[tempRow, tempColumn] = matrix[row, column];
-                                    tempColumn++;
-                                }
-                                break;
-                        }
-                    }
-                    tempColumn = 0;
-                    tempRow++;
-                }
-                tempRow = 0;
-                avoidColumn++;
-            }
-
-            double determinant = (matrix[0, 0] * determinant3x3(tempMatrix1)) -
-                (matrix[0, 1] * determinant3x3(tempMatrix2)) +
-                (matrix[0, 2] * determinant3x3(tempMatrix3)) -
-                (matrix[0, 3] * determinant3x3(tempMatrix4));
-            return determinant;
-        }
-
-        static double[] calculateRegression(double[,] matrixM, double[,] matrixM0, double[,] matrixM1, double[,] matrixM2, double[,] matrixM3)
-        {
-            double[] reggressionFormula = new double[4];
-            double a0 = determinant4x4(matrixM0) / determinant4x4(matrixM);
-            reggressionFormula[0] = a0;
-            double a1 = determinant4x4(matrixM1) / determinant4x4(matrixM);
-            reggressionFormula[1] = a1;
-            double a2 = determinant4x4(matrixM2) / determinant4x4(matrixM);
-            reggressionFormula[2] = a2;
-            double a3 = determinant4x4(matrixM3) / determinant4x4(matrixM);
-            reggressionFormula[3] = a3;
-            return reggressionFormula;
-        }
-
-        static double[] populateMatrices(List<int> quantity)
+        static void populateMatrices(List<int> quantity)
         {
             //matrices M and B
             double[,] matrixM = new double[4, 4];
@@ -333,79 +246,18 @@ namespace NonExamAssesment___Stock_Management
             //Matrix M1
             for (int row = 0; row < 4; row++)
             {
-                matrixM1[row, 1] = matrixB[row, 0];
+                matrixM0[row, 1] = matrixB[row, 0];
             }
             //Matrix M2
             for (int row = 0; row < 4; row++)
             {
-                matrixM2[row, 2] = matrixB[row, 0];
+                matrixM0[row, 2] = matrixB[row, 0];
             }
             //Matrix M3
             for (int row = 0; row < 4; row++)
             {
-                matrixM3[row, 3] = matrixB[row, 0];
+                matrixM0[row, 3] = matrixB[row, 0];
             }
-
-            return calculateRegression(matrixM, matrixM0, matrixM1, matrixM2, matrixM3);
-        }
-
-        static double calculateDailyPrediction(double[] reggressionFormula)
-        {
-            double dailyPredictionQuantity = 0;
-            string dayToday = DateTime.Today.DayOfWeek.ToString();
-            switch (dayToday)
-            {
-                case "Monday":
-                    dailyPredictionQuantity =
-                        Math.Round((reggressionFormula[3] * Math.Pow(0, 3)) +
-                        (reggressionFormula[2] * Math.Pow(0, 2)) +
-                        (reggressionFormula[1] * 0) +
-                        (reggressionFormula[0]), 0);
-                    break;
-                case "Tuesday":
-                    dailyPredictionQuantity =
-                        Math.Round((reggressionFormula[3] * Math.Pow(1, 3)) +
-                        (reggressionFormula[2] * Math.Pow(1, 2)) +
-                        (reggressionFormula[1] * 1) +
-                        (reggressionFormula[0]), 0);
-                    break;
-                case "Wednesday":
-                    dailyPredictionQuantity =
-                        Math.Round((reggressionFormula[3] * Math.Pow(2, 3)) +
-                        (reggressionFormula[2] * Math.Pow(2, 2)) +
-                        (reggressionFormula[1] * 2) +
-                        (reggressionFormula[0]), 0);
-                    break;
-                case "Thursday":
-                    dailyPredictionQuantity =
-                        Math.Round((reggressionFormula[3] * Math.Pow(3, 3)) +
-                        (reggressionFormula[2] * Math.Pow(3, 2)) +
-                        (reggressionFormula[1] * 3) +
-                        (reggressionFormula[0]), 0);
-                    break;
-                case "Friday":
-                    dailyPredictionQuantity =
-                        Math.Round((reggressionFormula[3] * Math.Pow(4, 3)) +
-                        (reggressionFormula[2] * Math.Pow(4, 2)) +
-                        (reggressionFormula[1] * 4) +
-                        (reggressionFormula[0]), 0);
-                    break;
-                case "Saturday":
-                    dailyPredictionQuantity =
-                        Math.Round((reggressionFormula[3] * Math.Pow(5, 3)) +
-                        (reggressionFormula[2] * Math.Pow(5, 2)) +
-                        (reggressionFormula[1] * 5) +
-                        (reggressionFormula[0]), 0);
-                    break;
-                case "Sunday":
-                    dailyPredictionQuantity =
-                        Math.Round((reggressionFormula[3] * Math.Pow(6, 3)) +
-                        (reggressionFormula[2] * Math.Pow(6, 2)) +
-                        (reggressionFormula[1] * 6) +
-                        (reggressionFormula[0]), 0);
-                    break;
-            }
-            return dailyPredictionQuantity;
         }
 
         private void PredictionSubmitButton_Click(object sender, EventArgs e)
@@ -429,8 +281,7 @@ namespace NonExamAssesment___Stock_Management
                         quantity.Add(int.Parse(readSales["salesQuantity"].ToString()));
                     }
 
-                    double[] reggressionFormula = populateMatrices(quantity);
-                    PredictionNextDaySaleText.Text = calculateDailyPrediction(reggressionFormula).ToString();
+                    populateMatrices(quantity);
                 }
             }
 
@@ -451,15 +302,9 @@ namespace NonExamAssesment___Stock_Management
                         quantity.Add(int.Parse(readUsage["usageQuantity"].ToString()));
                     }
 
-                    double[] reggressionFormula = populateMatrices(quantity);
-                    PredictionNextDaySaleText.Text = calculateDailyPrediction(reggressionFormula).ToString();
+                    populateMatrices(quantity);
                 }
             }
-        }
-
-        private void FuturePredictionButton_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
