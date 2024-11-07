@@ -44,6 +44,7 @@ namespace NonExamAssesment___Stock_Management
             this.Controls.Add(reportTotalCostLabel);
 
             Label reportTotalValueLabel = new Label();
+            reportTotalValueLabel.Size = new Size(150, 20);
             reportTotalValueLabel.Text = "Total Value";
             reportTotalValueLabel.Font = new Font("Calibri", 15);
             reportTotalValueLabel.Location = new Point(350, 50);
@@ -124,13 +125,15 @@ namespace NonExamAssesment___Stock_Management
                 }
 
                 Label totalCostTotal = new Label();
-                totalCostTotal.Text = $"total cost: {totalCost}";
+                totalCostTotal.Size = new Size(200, 20);
+                totalCostTotal.Text = $"total cost: £{totalCost}";
                 totalCostTotal.Font = new Font("Calibri", 15);
                 totalCostTotal.Location = new Point(500, 100);
                 this.Controls.Add(totalCostTotal);
 
                 Label totalValueTotal = new Label();
-                totalValueTotal.Text = $"total value: {totalValue}";
+                totalValueTotal.Size = new Size(200, 20);
+                totalValueTotal.Text = $"total value: £{totalValue}";
                 totalValueTotal.Font = new Font("Calibri", 15);
                 totalValueTotal.Location = new Point(500, 200);
                 this.Controls.Add(totalValueTotal);
