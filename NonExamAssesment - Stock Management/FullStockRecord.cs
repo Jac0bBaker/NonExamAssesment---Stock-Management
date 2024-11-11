@@ -16,14 +16,9 @@ namespace NonExamAssesment___Stock_Management
         public FullStockRecord()
         {
             InitializeComponent();
-            StockRecordDateRangeStartText.AppendText(todayDate);
-            StockRecordDateRangeEndText.AppendText(dateWeekAgo);
         }
 
         public performChecks check = new performChecks();
-
-        public string todayDate = DateTime.Today.ToShortDateString();
-        public string dateWeekAgo = DateTime.Today.AddDays(-7).ToShortDateString();
 
         private void StockRecordSubmitButton_Click(object sender, EventArgs e)
         {

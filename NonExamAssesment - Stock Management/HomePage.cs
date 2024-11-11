@@ -79,26 +79,6 @@ namespace NonExamAssesment___Stock_Management
             (new DeliveryDataEntryPage()).Show();
         }
 
-        private void WastageOutputBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        static int calculateWastage(int productID)
-        {
-            return 0;
-        }
-
-        private void WastageSubmitButton_Click(object sender, EventArgs e)
-        {
-            using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
-            {
-                connection.Open();
-                SQLiteCommand command = new SQLiteCommand("SELECT productID FROM Product WHERE orderFrequency = $orderFrequency", connection);
-                command.Parameters.AddWithValue("$orderFrequency", "daily");
-            }
-        }
-
         //---------------------------------------------------------------------------------------------
 
         public int calculateDeliveryQuantity(int productID)
@@ -108,8 +88,7 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkEachDelivery = new SQLiteCommand($"SELECT deliveryQuantity FROM Delivery WHERE productID = $productID", connection);
-                checkEachDelivery.Parameters.AddWithValue("$productID", $"{productID}");
+                SQLiteCommand checkEachDelivery = new SQLiteCommand($"SELECT deliveryQuantity FROM Delivery WHERE productID = '{productID}'", connection);
                 SQLiteDataReader readDeliveries = checkEachDelivery.ExecuteReader();
 
                 while (readDeliveries.Read())
@@ -127,8 +106,7 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkEachSale = new SQLiteCommand($"SELECT salesQuantity FROM salesData WHERE productID = $productID", connection);
-                checkEachSale.Parameters.AddWithValue("$productID", $"{productID}");
+                SQLiteCommand checkEachSale = new SQLiteCommand($"SELECT salesQuantity FROM salesData WHERE productID = '{productID}'", connection);
                 SQLiteDataReader readSales = checkEachSale.ExecuteReader();
 
                 while (readSales.Read())
@@ -146,8 +124,7 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkEachUse = new SQLiteCommand($"SELECT usageQuantity FROM usageData WHERE productID = $productID", connection);
-                checkEachUse.Parameters.AddWithValue("$productID", $"{productID}");
+                SQLiteCommand checkEachUse = new SQLiteCommand($"SELECT usageQuantity FROM usageData WHERE productID = '{productID}'", connection);
                 SQLiteDataReader readUsage = checkEachUse.ExecuteReader();
 
                 while (readUsage.Read())
@@ -165,8 +142,7 @@ namespace NonExamAssesment___Stock_Management
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=stockManagementDatabase.db;version=3;New=True;Compress=True"))
             {
                 connection.Open();
-                SQLiteCommand checkOrderFrequency = new SQLiteCommand("SELECT productName, orderFrequency, minStockLevel, onReport FROM Product WHERE orderFrequency = $orderFrequency", connection);
-                checkOrderFrequency.Parameters.AddWithValue("$orderFrequency", "on-demand");
+                SQLiteCommand checkOrderFrequency = new SQLiteCommand("SELECT productName, orderFrequency, minStockLevel, onReport FROM Product WHERE orderFrequency = 'on-demand'", connection);
                 SQLiteDataReader readProduct = checkOrderFrequency.ExecuteReader();
 
                 while (readProduct.Read())
@@ -454,11 +430,6 @@ namespace NonExamAssesment___Stock_Management
                     PredictionNextDaySaleText.Text = calculateDailyPrediction(reggressionFormula).ToString();
                 }
             }
-        }
-
-        private void FuturePredictionButton_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
